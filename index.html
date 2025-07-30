@@ -3,12 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Wagglo | Smart Pet Monitoring System</title>
+  <title>Wagglo | Give Your Dog More Than Walks</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
   <style>
     :root {
       --primary: #6ec1e4;
@@ -89,12 +87,12 @@
       60% {transform: translateY(-10px);}
     }
     
-    @keyframes petAnimation {
-      0% { transform: translateX(0) rotate(0); }
-      25% { transform: translateX(50px) rotate(5deg); }
+    @keyframes dogWalk {
+      0% { transform: translateX(-20px) rotate(0); }
+      25% { transform: translateX(20px) rotate(2deg); }
       50% { transform: translateX(0) rotate(0); }
-      75% { transform: translateX(-50px) rotate(-5deg); }
-      100% { transform: translateX(0) rotate(0); }
+      75% { transform: translateX(-10px) rotate(-2deg); }
+      100% { transform: translateX(-20px) rotate(0); }
     }
     
     /* Base Styles */
@@ -394,98 +392,93 @@
       margin-bottom: 0.5rem;
     }
     
-    .dashboard-grid {
+    /* How It Works Steps */
+    .steps-container {
+      max-width: 1000px;
+      margin: 0 auto;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      margin: 2rem 0;
+      gap: 3rem;
     }
     
-    .dashboard-card {
-      background: var(--card-bg);
-      padding: 1.5rem;
-      border-radius: 12px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    .step-card {
+      text-align: center;
+      position: relative;
     }
     
-    .dashboard-header {
+    .step-number {
+      width: 80px;
+      height: 80px;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      margin-bottom: 1.5rem;
+      justify-content: center;
+      font-size: 2rem;
+      font-weight: 700;
+      margin: 0 auto 2rem;
+      box-shadow: 0 10px 30px rgba(100, 182, 172, 0.3);
     }
     
-    .dashboard-header h3 {
+    .step-card h3 {
       font-size: 1.5rem;
-      color: var(--primary);
+      margin-bottom: 1rem;
+      color: var(--dark-brown);
     }
     
-    .date-filter select {
-      padding: 0.5rem 1rem;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      background: var(--card-bg);
-      color: var(--text);
-    }
-    
-    .health-dashboard {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    
-    /* Image Gallery */
-    .image-gallery {
+    /* Activity Showcase */
+    .activity-showcase {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
+      gap: 2rem;
       margin: 3rem auto;
       max-width: 1100px;
     }
     
-    .gallery-item {
+    .activity-item {
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
       transition: all 0.4s ease;
       transform: scale(0.95);
       opacity: 0;
-      height: 250px;
+      height: 300px;
       position: relative;
       cursor: pointer;
+      background: var(--card-bg);
     }
     
-    .gallery-item.active {
+    .activity-item.active {
       transform: scale(1);
       opacity: 1;
     }
     
-    .gallery-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.6s ease;
+    .activity-item:hover {
+      transform: scale(1.05);
+      box-shadow: 0 15px 40px rgba(100, 182, 172, 0.2);
     }
     
-    .gallery-item:hover img {
-      transform: scale(1.1);
+    .activity-icon {
+      font-size: 3rem;
+      color: var(--primary);
+      margin: 2rem auto 1rem;
+      display: block;
+      text-align: center;
     }
     
-    .gallery-caption {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: rgba(0, 0, 0, 0.6);
-      color: white;
-      padding: 1rem;
-      transform: translateY(100%);
-      transition: transform 0.3s ease;
+    .activity-content {
+      padding: 1.5rem;
+      text-align: center;
     }
     
-    .gallery-item:hover .gallery-caption {
-      transform: translateY(0);
+    .activity-content h4 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      color: var(--dark-brown);
     }
     
+    /* Testimonials */
     .testimonial-carousel {
       max-width: 900px;
       margin: 3rem auto;
@@ -579,14 +572,6 @@
       background: var(--primary-dark);
       color: #fff;
       transform: scale(1.08);
-    }
-
-    /* Animated Background Elements */
-    .bg-element {
-      position: absolute;
-      border-radius: 50%;
-      background: rgba(100, 182, 172, 0.05);
-      z-index: -1;
     }
     
     /* Ripple Buttons */
@@ -727,143 +712,6 @@
       opacity: 1;
     }
     
-    /* Animated Progress Bars */
-    .progress-container {
-      width: 100%;
-      background: rgba(100, 182, 172, 0.1);
-      border-radius: 10px;
-      margin: 1.5rem 0;
-      overflow: hidden;
-    }
-    
-    .progress-bar {
-      height: 10px;
-      background: linear-gradient(90deg, var(--primary), var(--secondary));
-      border-radius: 10px;
-      width: 0;
-      transition: width 1.5s ease-out;
-    }
-    
-    /* Pet Timeline */
-    .pet-timeline {
-      max-width: 1000px;
-      margin: 3rem auto;
-      position: relative;
-    }
-    
-    .timeline-bar {
-      position: absolute;
-      top: 50px;
-      left: 50%;
-      transform: translateX(-50%);
-      height: 4px;
-      width: 80%;
-      background: var(--primary);
-      z-index: 1;
-    }
-    
-    .timeline-items {
-      display: flex;
-      justify-content: space-between;
-      position: relative;
-      z-index: 2;
-    }
-    
-    .timeline-item {
-      width: 120px;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    
-    .timeline-dot {
-      width: 30px;
-      height: 30px;
-      background: var(--card-bg);
-      border: 4px solid var(--primary);
-      border-radius: 50%;
-      margin: 0 auto 15px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.9rem;
-      color: var(--primary);
-      transition: all 0.3s ease;
-    }
-    
-    .timeline-item.active .timeline-dot {
-      background: var(--primary);
-      color: white;
-      transform: scale(1.2);
-    }
-    
-    .timeline-content {
-      position: absolute;
-      top: 100px;
-      left: 0;
-      right: 0;
-      background: var(--card-bg);
-      border-radius: 15px;
-      padding: 2rem;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.5s ease;
-    }
-    
-    .timeline-item.active + .timeline-content {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    
-    /* Device Showcase */
-    .device-showcase {
-      max-width: 1000px;
-      margin: 4rem auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 2rem;
-    }
-    
-    .device-viewer {
-      width: 100%;
-      height: 400px;
-      background: rgba(100, 182, 172, 0.05);
-      border-radius: 20px;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    
-    .device-canvas {
-      width: 100%;
-      height: 100%;
-    }
-    
-    .device-controls {
-      display: flex;
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-    
-    .control-btn {
-      padding: 0.5rem 1.5rem;
-      background: var(--primary);
-      color: white;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    
-    .control-btn:hover {
-      background: var(--primary-dark);
-      transform: translateY(-2px);
-    }
-    
     /* Footer */
     footer {
       background: var(--primary);
@@ -884,12 +732,14 @@
     }
     
     .footer-content {
-      max-width: 1000px;
+      max-width: 1200px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(4, 1fr);
       gap: 2rem;
       text-align: left;
+      align-items: start;
+      justify-items: start;
     }
     
     .footer-column h3 {
@@ -1021,7 +871,7 @@
         min-height: 400px;
       }
       
-      .dashboard-grid {
+      .steps-container {
         grid-template-columns: 1fr;
       }
       
@@ -1088,14 +938,8 @@
         min-height: 450px;
       }
       
-      .timeline-items {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 1rem;
-      }
-      
-      .timeline-bar {
-        display: none;
+      .activity-showcase {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -1110,61 +954,27 @@
   <div class="top-menu-wrapper" id="main-menu">
     <div class="top-menu-inner">
       <div class="top-menu-item active" onclick="scrollToSection('hero')">Home</div>
-      <div class="top-menu-item" onclick="scrollToSection('features')">Features</div>
-      <div class="top-menu-item" onclick="scrollToSection('showcase')">Product</div>
-      <div class="top-menu-item" onclick="scrollToSection('health')">Health</div>
-      <div class="top-menu-item" onclick="scrollToSection('timeline')">Timeline</div>
+      <div class="top-menu-item" onclick="scrollToSection('mission')">Mission</div>
+      <div class="top-menu-item" onclick="scrollToSection('what-is-wagglo')">Product</div>
+      <div class="top-menu-item" onclick="scrollToSection('how-it-works')">How It Works</div>
+      <div class="top-menu-item" onclick="scrollToSection('who-its-for')">Who It's For</div>
       <div class="top-menu-item" onclick="scrollToSection('testimonials')">Reviews</div>
-      <div class="top-menu-item" onclick="scrollToSection('contact')">Contact</div>
+      <div class="top-menu-item" onclick="scrollToSection('contact')">Join Now</div>
     </div>
   </div>
-  <script>
-    // Fade menu on scroll, restore on hover/focus
-    (function() {
-      const menu = document.getElementById('main-menu');
-      let fadedByScroll = false;
-
-      function updateMenuFade() {
-        const scrollY = window.scrollY || window.pageYOffset;
-        if (scrollY > 80) {
-          menu.classList.add('faded');
-          fadedByScroll = true;
-        } else {
-          menu.classList.remove('faded');
-          fadedByScroll = false;
-        }
-      }
-
-      window.addEventListener('scroll', updateMenuFade);
-
-      // Show menu fully on hover/focus
-      menu.addEventListener('mouseenter', function() {
-        if (fadedByScroll) menu.classList.remove('faded');
-      });
-      menu.addEventListener('mouseleave', function() {
-        if (window.scrollY > 80) menu.classList.add('faded');
-      });
-      menu.addEventListener('focusin', function() {
-        if (fadedByScroll) menu.classList.remove('faded');
-      });
-      menu.addEventListener('focusout', function() {
-        if (window.scrollY > 80) menu.classList.add('faded');
-      });
-    })();
-  </script>
 
   <!-- Hero Section -->
   <section id="hero" class="hero scroll-section">
     <div class="hero-content">
-      <h1>Intelligent Pet Care for the Modern Family</h1>
-      <p>AI-powered monitoring that understands your pet's unique behaviors and needs, providing real-time insights and alerts</p>
+      <h1>Give your dog more than walks. Give them a life.</h1>
+      <p>Discover unique dog-friendly experiences and connect with your local dog-loving community</p>
       
       <div class="hero-buttons">
         <button class="btn btn-outline" onclick="scrollToSection('contact')">
-          <i class="fas fa-paw"></i> Get Started
+          <i class="fas fa-paw"></i> Find Your Dog's Next Adventure
         </button>
-        <button class="btn" onclick="scrollToSection('showcase')">
-          <i class="fas fa-eye"></i> View Product
+        <button class="btn" onclick="scrollToSection('what-is-wagglo')">
+          <i class="fas fa-heart"></i> Join the Pack
         </button>
       </div>
     </div>
@@ -1174,53 +984,41 @@
     </div>
   </section>
 
-  <!-- Features Section -->
-  <section id="features" class="scroll-section">
+  <!-- Mission Section -->
+  <section id="mission" class="scroll-section">
     <div class="section-heading">
-      <h2>Smart Features</h2>
-      <p>Advanced AI technology that transforms how you care for your pets</p>
+      <h2>Why We Do It</h2>
+      <p>Helping dogs thrive by helping their humans do better</p>
     </div>
     
     <div class="feature-grid">
       <div class="feature-card" style="--order: 0">
         <div class="card">
           <div class="card-icon">
-            <i class="fas fa-video"></i>
+            <i class="fas fa-brain"></i>
           </div>
-          <h3>Crystal Clear Monitoring</h3>
-          <p>1080p HD live streaming with night vision capabilities ensures you never miss a moment, day or night. Our advanced image processing delivers crisp, clear video even in low light conditions.</p>
-          <div class="progress-container">
-            <div class="progress-bar" style="width: 95%"></div>
-          </div>
-          <p>Video quality satisfaction</p>
+          <h3>Under-Stimulated Dogs</h3>
+          <p>Most dogs are physically, mentally, and socially under-stimulated. They crave variety, adventure, and meaningful experiences beyond basic walks around the block.</p>
         </div>
       </div>
       
       <div class="feature-card" style="--order: 1">
         <div class="card">
           <div class="card-icon">
-            <i class="fas fa-brain"></i>
+            <i class="fas fa-clock"></i>
           </div>
-          <h3>Behavior Analysis</h3>
-          <p>Our AI recognizes patterns and alerts you to unusual activities like excessive scratching, lethargy, or anxiety. Learns your pet's normal behavior to detect abnormalities with 93% accuracy.</p>
-          <div class="progress-container">
-            <div class="progress-bar" style="width: 89%"></div>
-          </div>
-          <p>Accuracy rate</p>
+          <h3>Busy Pet Parents</h3>
+          <p>Dog owners want to do more for their pets but often lack time, ideas, or knowledge about what activities would best suit their dog's unique personality and needs.</p>
         </div>
       </div>
       
       <div class="feature-card" style="--order: 2">
         <div class="card">
           <div class="card-icon">
-            <i class="fas fa-utensils"></i>
+            <i class="fas fa-lightbulb"></i>
           </div>
-          <h3>Smart Feeding System</h3>
-          <p>Automated food dispensing with portion control and customizable schedules tailored to your pet's dietary needs. Integrates with nutrition databases for optimal feeding recommendations.</p>
-          <div class="progress-container">
-            <div class="progress-bar" style="width: 98%"></div>
-          </div>
-          <p>Schedule adherence</p>
+          <h3>The Wagglo Solution</h3>
+          <p>We make it easy to give dogs richer, more fulfilling lives through personalized activity recommendations and community connections tailored to each dog's unique profile.</p>
         </div>
       </div>
     </div>
@@ -1229,179 +1027,145 @@
   <!-- Stats Dashboard -->
   <section class="scroll-section section-alt-bg">
     <div class="section-heading">
-      <h2>By The Numbers</h2>
-      <p>Quantifying the impact of our pet monitoring technology</p>
+      <h2>Making Tails Wag Everywhere</h2>
+      <p>Join thousands of dogs already living their best lives</p>
     </div>
     
     <div class="stats-dashboard">
       <div class="stat-card">
-        <div class="stat-value" id="happy-pets">12,847</div>
-        <p>Happy Pets</p>
+        <div class="stat-value" id="happy-dogs">8,500+</div>
+        <p>Happy Dogs</p>
       </div>
       <div class="stat-card">
-        <div class="stat-value" id="alerts-sent">3.2M</div>
-        <p>Health Alerts</p>
+        <div class="stat-value" id="adventures">45K+</div>
+        <p>Adventures Discovered</p>
       </div>
       <div class="stat-card">
-        <div class="stat-value" id="countries">64</div>
-        <p>Countries</p>
+        <div class="stat-value" id="communities">150+</div>
+        <p>Communities</p>
       </div>
       <div class="stat-card">
-        <div class="stat-value" id="response-time">2.7s</div>
-        <p>Avg. Alert Time</p>
+        <div class="stat-value" id="satisfaction">97%</div>
+        <p>Owner Satisfaction</p>
       </div>
     </div>
   </section>
 
-  <!-- Product Showcase -->
-  <section id="showcase" class="scroll-section">
+  <!-- What Is Wagglo Section -->
+  <section id="what-is-wagglo" class="scroll-section">
     <div class="section-heading">
-      <h2>Meet PetVision AI</h2>
-      <p>The next generation of pet monitoring technology</p>
+      <h2>What Is Wagglo?</h2>
+      <p>Think of it as ClassPass meets Tinder for dog adventures</p>
     </div>
     
-    <div class="device-showcase">
-      <div class="device-viewer">
-        <canvas id="device-canvas" class="device-canvas"></canvas>
+    <div class="activity-showcase">
+      <div class="activity-item">
+        <i class="fas fa-route activity-icon"></i>
+        <div class="activity-content">
+          <h4>Walking Routes</h4>
+          <p>Discover local dog-friendly paths, trails, and scenic routes perfect for your pup's energy level and interests.</p>
+        </div>
       </div>
-      <div class="device-controls">
-        <button class="control-btn" onclick="rotateDevice('front')">Front</button>
-        <button class="control-btn" onclick="rotateDevice('side')">Side</button>
-        <button class="control-btn" onclick="rotateDevice('top')">Top</button>
+      
+      <div class="activity-item">
+        <i class="fas fa-users activity-icon"></i>
+        <div class="activity-content">
+          <h4>Play Areas & Meetups</h4>
+          <p>Find off-leash parks, dog beaches, and organized meetups where your dog can socialize and play freely.</p>
+        </div>
       </div>
+      
+      <div class="activity-item">
+        <i class="fas fa-puzzle-piece activity-icon"></i>
+        <div class="activity-content">
+          <h4>Enrichment Activities</h4>
+          <p>Access mentally stimulating games, training exercises, and activities tailored to your dog's breed and personality.</p>
+        </div>
+      </div>
+      
+      <div class="activity-item">
+        <i class="fas fa-calendar-alt activity-icon"></i>
+        <div class="activity-content">
+          <h4>Tailored Events</h4>
+          <p>Join breed-specific events, training classes, and social gatherings designed for your dog's temperament and needs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section id="how-it-works" class="scroll-section section-alt-bg">
+    <div class="section-heading">
+      <h2>How It Works</h2>
+      <p>Three simple steps to unlock your dog's best life</p>
+    </div>
+    
+    <div class="steps-container">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <h3>Create Your Dog's Profile</h3>
+        <p>Tell us about your dog's age, breed, energy level, and temperament. The more we know, the better we can personalize their experience.</p>
+      </div>
+      
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <h3>Get Personalized Recommendations</h3>
+        <p>Our algorithm matches your dog with activities, routes, and events perfectly suited to their personality and your lifestyle.</p>
+      </div>
+      
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <h3>Explore & Connect</h3>
+        <p>Save favorites, share experiences with other dog parents, and join local dog events. Watch your pup's happiness soar!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who It's For -->
+  <section id="who-its-for" class="scroll-section">
+    <div class="section-heading">
+      <h2>Who It's For</h2>
+      <p>Every dog parent who wants to give their pup the best life possible</p>
     </div>
     
     <div class="feature-grid">
-      <div class="feature-card">
+      <div class="feature-card" style="--order: 0">
         <div class="card">
           <div class="card-icon">
-            <i class="fas fa-microchip"></i>
+            <i class="fas fa-business-time"></i>
           </div>
-          <h3>Advanced AI Processor</h3>
-          <p>Our custom neural processing unit analyzes pet behavior in real-time, identifying patterns and anomalies that indicate health or emotional issues.</p>
+          <h3>Busy Dog Owners</h3>
+          <p>You love your dog but struggle to find time for creative activities. Wagglo makes it easy to give them enriching experiences even with a packed schedule.</p>
         </div>
       </div>
       
-      <div class="feature-card">
+      <div class="feature-card" style="--order: 1">
         <div class="card">
           <div class="card-icon">
-            <i class="fas fa-wifi"></i>
+            <i class="fas fa-seedling"></i>
           </div>
-          <h3>Seamless Connectivity</h3>
-          <p>Dual-band WiFi and Bluetooth 5.2 ensure reliable connectivity even in large homes. Cloud sync keeps your data secure and accessible anywhere.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Health Dashboard -->
-  <section id="health" class="scroll-section">
-    <div class="section-heading">
-      <h2>Health Dashboard</h2>
-      <p>Monitor your pet's wellbeing with our comprehensive analytics</p>
-    </div>
-    
-    <div class="health-dashboard">
-      <div class="dashboard-header">
-        <h3>Luna's Health Metrics</h3>
-        <div class="date-filter">
-          <select id="date-range" class="form-select" aria-label="Select date range for health metrics">
-            <option>Last 24 hours</option>
-            <option>Last 7 days</option>
-            <option>Last 30 days</option>
-          </select>
+          <h3>New Dog Parents</h3>
+          <p>Just welcomed a furry friend? Get expert guidance on socialization, training activities, and connecting with other new dog parents in your area.</p>
         </div>
       </div>
       
-      <div class="dashboard-grid">
-        <div class="dashboard-card">
-          <h4>Activity Level</h4>
-          <canvas id="activity-chart" height="200"></canvas>
-        </div>
-        
-        <div class="dashboard-card">
-          <h4>Sleep Quality</h4>
-          <canvas id="sleep-chart" height="200"></canvas>
-        </div>
-        
-        <div class="dashboard-card">
-          <h4>Nutrition Balance</h4>
-          <canvas id="nutrition-chart" height="200"></canvas>
-        </div>
-        
-        <div class="dashboard-card">
-          <h4>Stress Indicators</h4>
-          <canvas id="stress-chart" height="200"></canvas>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Pet Timeline -->
-  <section id="timeline" class="scroll-section section-alt-bg">
-    <div class="section-heading">
-      <h2>Daily Routine</h2>
-      <p>Track your pet's activities throughout the day</p>
-    </div>
-    
-    <div class="pet-timeline">
-      <div class="timeline-bar"></div>
-      
-      <div class="timeline-items">
-        <div class="timeline-item active" onclick="showTimelineContent(0)">
-          <div class="timeline-dot"><i class="fas fa-sun"></i></div>
-          <p>Morning</p>
-        </div>
-        
-        <div class="timeline-item" onclick="showTimelineContent(1)">
-          <div class="timeline-dot"><i class="fas fa-cloud-sun"></i></div>
-          <p>Midday</p>
-        </div>
-        
-        <div class="timeline-item" onclick="showTimelineContent(2)">
-          <div class="timeline-dot"><i class="fas fa-sun"></i></div>
-          <p>Afternoon</p>
-        </div>
-        
-        <div class="timeline-item" onclick="showTimelineContent(3)">
-          <div class="timeline-dot"><i class="fas fa-moon"></i></div>
-          <p>Evening</p>
-        </div>
-        
-        <div class="timeline-item" onclick="showTimelineContent(4)">
-          <div class="timeline-dot"><i class="fas fa-bed"></i></div>
-          <p>Night</p>
-        </div>
-      </div>
-      
-      <div class="timeline-content">
-        <h3 id="timeline-title">Morning Routine</h3>
-        <p id="timeline-description">Your pet starts the day with 15 minutes of activity followed by breakfast. The AI system tracks eating habits and energy levels to ensure optimal nutrition.</p>
-        <div class="image-gallery">
-          <div class="gallery-item">
-            <img src="https://images.unsplash.com/photo-1586671267731-da2cf3ceeb80" alt="Pet eating breakfast">
-            <div class="gallery-caption">
-              <h4>Breakfast Time</h4>
-              <p>Nutrition tracking in action</p>
-            </div>
+      <div class="feature-card" style="--order: 2">
+        <div class="card">
+          <div class="card-icon">
+            <i class="fas fa-star"></i>
           </div>
-          <div class="gallery-item">
-            <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb" alt="Pet playing">
-            <div class="gallery-caption">
-              <h4>Morning Play</h4>
-              <p>Activity monitoring</p>
-            </div>
-          </div>
+          <h3>Experienced Owners</h3>
+          <p>You've been a dog parent for years but want fresh, fun activities to keep your relationship exciting and your dog mentally stimulated.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Testimonials -->
-  <section id="testimonials" class="scroll-section">
+  <section id="testimonials" class="scroll-section section-alt-bg">
     <div class="section-heading">
-      <h2>Happy Pet Owners</h2>
-      <p>What our customers say about PetVision AI</p>
+      <h2>Happy Dog Parents</h2>
+      <p>Real stories from the Wagglo community</p>
     </div>
     <div class="testimonial-carousel">
       <div class="carousel-arrows">
@@ -1409,18 +1173,18 @@
         <button class="carousel-arrow" aria-label="Next testimonial" onclick="nextTestimonial(event)"><i class="fas fa-chevron-right"></i></button>
       </div>
       <div class="testimonial active">
-        <p class="testimonial-quote">This device saved my cat's life when it detected unusual lethargy. The vet said early detection made all the difference. I can't recommend PetVision AI enough for any pet owner who wants peace of mind.</p>
-        <p class="testimonial-author">- Sarah J., Cat Owner</p>
+        <p class="testimonial-quote">"Wagglo made me realize how bored my dog was. Now she's excited every day and I've discovered amazing places in my own neighborhood I never knew existed."</p>
+        <p class="testimonial-author">- Sarah M., Golden Retriever Mom</p>
       </div>
       
       <div class="testimonial">
-        <p class="testimonial-quote">As someone who travels frequently for work, the peace of mind I get from checking in on my dogs through the PetVision app is absolutely priceless. The video quality is excellent and the behavior alerts keep me informed.</p>
-        <p class="testimonial-author">- Michael T., Dog Owner</p>
+        <p class="testimonial-quote">"It's like a social life for my dog and for me. We've met so many wonderful people and dogs through Wagglo's meetup recommendations. Best app ever!"</p>
+        <p class="testimonial-author">- Mike T., Border Collie Dad</p>
       </div>
       
       <div class="testimonial">
-        <p class="testimonial-quote">The behavior insights helped us understand our rescue dog's anxiety triggers and create a better environment for him. This is truly life-changing technology that has strengthened our bond with our pet.</p>
-        <p class="testimonial-author">- Emma & David R., Pet Parents</p>
+        <p class="testimonial-quote">"The behavior insights helped us understand our rescue dog's anxiety triggers and find activities that build his confidence. This is truly life-changing technology."</p>
+        <p class="testimonial-author">- Emma & David R., Rescue Dog Parents</p>
       </div>
     </div>
   </section>
@@ -1428,8 +1192,8 @@
   <!-- Contact Section -->
   <section id="contact" class="scroll-section">
     <div class="section-heading">
-      <h2>Ready to Get Started?</h2>
-      <p>Join thousands of pet owners who trust our technology</p>
+      <h2>Ready to Transform Your Dog's Life?</h2>
+      <p>Join thousands of dog parents who've already discovered the joy of enriched pet living</p>
     </div>
     
     <div class="feature-card contact-card">
@@ -1437,19 +1201,22 @@
         <div class="card-icon">
           <i class="fas fa-paw"></i>
         </div>
-        <h3 class="contact-card h3">Request More Information</h3>
-        <p class="contact-card p">Our team will contact you to discuss the perfect solution for your pet</p>
+        <h3 class="contact-card h3">Start Your Adventure Today</h3>
+        <p class="contact-card p">Sign up now and get personalized recommendations for your pup</p>
         
         <form id="contact-form" class="contact-form">
           <input type="text" id="name" placeholder="Your Name" class="form-input" aria-label="Your name">
           <input type="email" id="email" placeholder="Email Address" class="form-input" aria-label="Your email address">
-          <select id="interest" class="form-select" aria-label="Select your area of interest">
-            <option>I'm interested in...</option>
-            <option>Home Monitoring System</option>
-            <option>Commercial Solutions</option>
-            <option>Veterinary Partnership</option>
+          <input type="text" id="dog-name" placeholder="Your Dog's Name" class="form-input" aria-label="Your dog's name">
+          <select id="interest" class="form-select" aria-label="Select your primary interest">
+            <option>What interests you most?</option>
+            <option>New walking routes and trails</option>
+            <option>Dog socialization and meetups</option>
+            <option>Mental enrichment activities</option>
+            <option>Breed-specific events</option>
+            <option>All of the above!</option>
           </select>
-          <button type="submit" class="btn btn-full-width">Submit Request</button>
+          <button type="submit" class="btn btn-full-width">Join Wagglo Free</button>
           <div class="form-feedback" id="form-feedback"></div>
         </form>
       </div>
@@ -1460,17 +1227,27 @@
   <footer>
     <div class="footer-content">
       <div class="footer-column">
-        <h3>PetVision AI</h3>
-        <p>Advanced pet monitoring technology powered by artificial intelligence for the modern pet owner.</p>
+        <h3>Wagglo</h3>
+        <p>Give your dog more than walks. Give them a life full of adventures, friends, and enriching experiences.</p>
       </div>
       
       <div class="footer-column">
         <h3>Quick Links</h3>
         <ul>
-          <li><a href="#features">Features</a></li>
-          <li><a href="#showcase">Product</a></li>
-          <li><a href="#health">Health Dashboard</a></li>
-          <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="#mission">Our Mission</a></li>
+          <li><a href="#what-is-wagglo">What Is Wagglo</a></li>
+          <li><a href="#how-it-works">How It Works</a></li>
+          <li><a href="#who-its-for">Who It's For</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h3>Resources</h3>
+        <ul>
+          <li><a href="#">Dog Care Tips</a></li>
+          <li><a href="#">Community Guidelines</a></li>
+          <li><a href="#">Safety Tips</a></li>
+          <li><a href="#">Support</a></li>
         </ul>
       </div>
       
@@ -1480,6 +1257,7 @@
           <li><a href="#">Privacy Policy</a></li>
           <li><a href="#">Terms of Service</a></li>
           <li><a href="#">Cookie Policy</a></li>
+          <li><a href="#">Contact Us</a></li>
         </ul>
       </div>
     </div>
@@ -1489,145 +1267,179 @@
       <a href="#" aria-label="Follow us on Twitter"><i class="fab fa-twitter"></i></a>
       <a href="#" aria-label="Follow us on Instagram"><i class="fab fa-instagram"></i></a>
       <a href="#" aria-label="Follow us on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-      <a href="#" aria-label="Watch us on YouTube"><i class="fab fa-youtube"></i></a>
+      <a href="#" aria-label="Watch us on TikTok"><i class="fab fa-tiktok"></i></a>
     </div>
     
     <div class="copyright">
-      <p>&copy; 2025 PetVision AI. All rights reserved.</p>
+      <p>&copy; 2025 Wagglo. All rights reserved. Made with ❤️ for dogs everywhere.</p>
     </div>
   </footer>
 
   <script>
-    // Initialize charts
-    function initCharts() {
-      // Activity Chart
-      const activityCtx = document.getElementById('activity-chart').getContext('2d');
-      const activityChart = new Chart(activityCtx, {
-        type: 'line',
-        data: {
-          labels: ['6 AM', '9 AM', '12 PM', '3 PM', '6 PM', '9 PM', '12 AM'],
-          datasets: [{
-            label: 'Activity Level',
-            data: [35, 80, 45, 65, 40, 30, 20],
-            borderColor: '#64b6ac',
-            backgroundColor: 'rgba(100, 182, 172, 0.1)',
-            borderWidth: 3,
-            tension: 0.3,
-            fill: true
-          }]
-        },
-        options: {
-          responsive: true,
-          plugins: {
-            legend: {
-              display: false
-            }
-          },
-          scales: {
-            y: {
-              beginAtZero: true,
-              max: 100
-            }
+    // Menu fade functionality and scroll synchronization
+    (function() {
+      const menu = document.getElementById('main-menu');
+      const sectionIds = ['hero', 'mission', 'what-is-wagglo', 'how-it-works', 'who-its-for', 'testimonials', 'contact'];
+      const menuItems = document.querySelectorAll('.top-menu-item');
+      const sections = sectionIds.map(id => document.getElementById(id));
+      let fadedByScroll = false;
+      let isScrolling = false;
+
+      // Throttle scroll events for better performance
+      function throttle(func, limit) {
+        let inThrottle;
+        return function() {
+          const args = arguments;
+          const context = this;
+          if (!inThrottle) {
+            func.apply(context, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
           }
         }
-      });
-      
-      // Sleep Chart
-      const sleepCtx = document.getElementById('sleep-chart').getContext('2d');
-      const sleepChart = new Chart(sleepCtx, {
-        type: 'doughnut',
-        data: {
-          labels: ['Deep Sleep', 'Light Sleep', 'Restless'],
-          datasets: [{
-            data: [65, 25, 10],
-            backgroundColor: ['#64b6ac', '#6ec1e4', '#f9b572'],
-            borderWidth: 0
-          }]
-        },
-        options: {
-          responsive: true,
-          cutout: '70%',
-          plugins: {
-            legend: {
-              position: 'bottom'
-            }
+      }
+
+      // Determine which section is currently most visible
+      function getCurrentSection() {
+        const scrollY = window.scrollY || window.pageYOffset;
+        const windowHeight = window.innerHeight;
+        let currentSection = 0;
+        let maxVisibleArea = 0;
+
+        // For each section, calculate how much is visible
+        for (let i = 0; i < sections.length; i++) {
+          if (!sections[i]) continue;
+          
+          const rect = sections[i].getBoundingClientRect();
+          const sectionTop = rect.top;
+          const sectionBottom = rect.bottom;
+          const sectionHeight = rect.height;
+
+          // Calculate visible area of this section
+          let visibleArea = 0;
+          if (sectionTop <= 0 && sectionBottom >= windowHeight) {
+            // Section fills entire viewport
+            visibleArea = windowHeight;
+          } else if (sectionTop <= 0 && sectionBottom > 0) {
+            // Top is cut off, bottom is visible
+            visibleArea = sectionBottom;
+          } else if (sectionTop < windowHeight && sectionBottom >= windowHeight) {
+            // Bottom is cut off, top is visible
+            visibleArea = windowHeight - sectionTop;
+          } else if (sectionTop >= 0 && sectionBottom <= windowHeight) {
+            // Entire section is visible
+            visibleArea = sectionHeight;
+          }
+
+          // If this section has more visible area, it's the current one
+          if (visibleArea > maxVisibleArea) {
+            maxVisibleArea = visibleArea;
+            currentSection = i;
           }
         }
-      });
-      
-      // Nutrition Chart
-      const nutritionCtx = document.getElementById('nutrition-chart').getContext('2d');
-      const nutritionChart = new Chart(nutritionCtx, {
-        type: 'bar',
-        data: {
-          labels: ['Protein', 'Carbs', 'Fats', 'Fiber', 'Vitamins'],
-          datasets: [{
-            label: 'Nutrition Balance',
-            data: [85, 70, 65, 90, 75],
-            backgroundColor: '#f9b572',
-            borderWidth: 0
-          }]
-        },
-        options: {
-          responsive: true,
-          plugins: {
-            legend: {
-              display: false
-            }
-          },
-          scales: {
-            y: {
-              beginAtZero: true,
-              max: 100
-            }
+
+        return currentSection;
+      }
+
+      // Update active menu item
+      function updateActiveMenuItem() {
+        const current = getCurrentSection();
+        menuItems.forEach((item, i) => {
+          if (i === current) {
+            item.classList.add('active');
+          } else {
+            item.classList.remove('active');
+          }
+        });
+      }
+
+      // Handle menu fading
+      function updateMenuFade() {
+        const scrollY = window.scrollY || window.pageYOffset;
+        if (scrollY > 80) {
+          if (!fadedByScroll) {
+            menu.classList.add('faded');
+            fadedByScroll = true;
+          }
+        } else {
+          if (fadedByScroll) {
+            menu.classList.remove('faded');
+            fadedByScroll = false;
           }
         }
+      }
+
+      // Combined scroll handler with throttling
+      const handleScroll = throttle(() => {
+        updateMenuFade();
+        updateActiveMenuItem();
+        isScrolling = false;
+      }, 16); // ~60fps
+
+      // Event listeners
+      window.addEventListener('scroll', () => {
+        isScrolling = true;
+        handleScroll();
       });
-      
-      // Stress Chart
-      const stressCtx = document.getElementById('stress-chart').getContext('2d');
-      const stressChart = new Chart(stressCtx, {
-        type: 'radar',
-        data: {
-          labels: ['Noise', 'Separation', 'New People', 'Other Pets', 'Environment'],
-          datasets: [{
-            label: 'Stress Factors',
-            data: [30, 65, 40, 50, 25],
-            backgroundColor: 'rgba(249, 181, 114, 0.2)',
-            borderColor: '#f9b572',
-            pointBackgroundColor: '#f9b572',
-            borderWidth: 2
-          }]
-        },
-        options: {
-          responsive: true,
-          scales: {
-            r: {
-              beginAtZero: true,
-              max: 100
-            }
-          }
-        }
+
+      window.addEventListener('resize', throttle(() => {
+        updateActiveMenuItem();
+      }, 100));
+
+      // Menu hover/focus handlers
+      menu.addEventListener('mouseenter', function() {
+        if (fadedByScroll) menu.classList.remove('faded');
       });
-    }
-    
-    // Scroll to section function
+
+      menu.addEventListener('mouseleave', function() {
+        if (window.scrollY > 80) menu.classList.add('faded');
+      });
+
+      menu.addEventListener('focusin', function() {
+        if (fadedByScroll) menu.classList.remove('faded');
+      });
+
+      menu.addEventListener('focusout', function() {
+        if (window.scrollY > 80) menu.classList.add('faded');
+      });
+
+      // Initialize on load
+      document.addEventListener('DOMContentLoaded', () => {
+        updateActiveMenuItem();
+        updateMenuFade();
+      });
+
+      // Also update when page loads completely
+      window.addEventListener('load', () => {
+        updateActiveMenuItem();
+      });
+    })();
+
+    // Scroll to section function with improved active state handling
     function scrollToSection(id) {
       const element = document.getElementById(id);
+      if (!element) return;
+
+      // Find the corresponding menu item index
+      const sectionIds = ['hero', 'mission', 'what-is-wagglo', 'how-it-works', 'who-its-for', 'testimonials', 'contact'];
+      const targetIndex = sectionIds.indexOf(id);
+      
+      // Immediately update active state for responsive feel
+      if (targetIndex !== -1) {
+        const menuItems = document.querySelectorAll('.top-menu-item');
+        menuItems.forEach((item, i) => {
+          if (i === targetIndex) {
+            item.classList.add('active');
+          } else {
+            item.classList.remove('active');
+          }
+        });
+      }
+
+      // Smooth scroll to the section
       window.scrollTo({
         top: element.offsetTop - 80,
         behavior: 'smooth'
-      });
-      // Update active menu item
-      document.querySelectorAll('.top-menu-item').forEach(item => {
-        item.classList.remove('active');
-      });
-      // Find the menu item that matches the section
-      const menuItems = document.querySelectorAll('.top-menu-item');
-      menuItems.forEach(item => {
-        if (item.getAttribute('onclick') && item.getAttribute('onclick').includes(id)) {
-          item.classList.add('active');
-        }
       });
     }
     
@@ -1643,7 +1455,7 @@
         ripple.style.top = `${y}px`;
         
         this.appendChild(ripple);
-
+        
         setTimeout(() => {
           ripple.remove();
         }, 600);
@@ -1653,12 +1465,26 @@
     // Animate stats counting
     function animateValue(id, start, end, duration) {
       const obj = document.getElementById(id);
+      if (!obj) return;
+      
       let startTimestamp = null;
       const step = (timestamp) => {
         if (!startTimestamp) startTimestamp = timestamp;
         const progress = Math.min((timestamp - startTimestamp) / duration, 1);
         const value = Math.floor(progress * (end - start) + start);
-        obj.innerHTML = value.toLocaleString();
+        
+        if (id === 'satisfaction') {
+          obj.innerHTML = value + '%';
+        } else if (id === 'happy-dogs') {
+          obj.innerHTML = value.toLocaleString() + '+';
+        } else if (id === 'adventures') {
+          obj.innerHTML = (value / 1000).toFixed(0) + 'K+';
+        } else if (id === 'communities') {
+          obj.innerHTML = value + '+';
+        } else {
+          obj.innerHTML = value.toLocaleString();
+        }
+        
         if (progress < 1) {
           window.requestAnimationFrame(step);
         }
@@ -1682,225 +1508,67 @@
     // Enhanced testimonial carousel
     let currentTestimonial = 0;
     const testimonials = document.querySelectorAll('.testimonial');
+    
     function showTestimonial(index) {
       testimonials.forEach(testimonial => {
         testimonial.classList.remove('active');
       });
-      testimonials[index].classList.add('active');
-      currentTestimonial = index;
+      if (testimonials[index]) {
+        testimonials[index].classList.add('active');
+        currentTestimonial = index;
+      }
     }
+    
     function nextTestimonial(e) {
       if (e) e.preventDefault();
       let nextIndex = currentTestimonial + 1;
       if (nextIndex >= testimonials.length) nextIndex = 0;
       showTestimonial(nextIndex);
     }
+    
     function prevTestimonial(e) {
       if (e) e.preventDefault();
       let prevIndex = currentTestimonial - 1;
       if (prevIndex < 0) prevIndex = testimonials.length - 1;
       showTestimonial(prevIndex);
     }
-    // Auto-advance
-    setInterval(nextTestimonial, 5000);
+    
+    // Auto-advance testimonials
+    if (testimonials.length > 0) {
+      setInterval(nextTestimonial, 6000);
+    }
     
     // Contact form validation and feedback
     document.getElementById('contact-form').addEventListener('submit', function(e) {
       e.preventDefault();
       const name = document.getElementById('name').value.trim();
       const email = document.getElementById('email').value.trim();
+      const dogName = document.getElementById('dog-name').value.trim();
       const interest = document.getElementById('interest').value;
       const feedback = document.getElementById('form-feedback');
-      if (!name || !email || interest === "I'm interested in...") {
+      
+      if (!name || !email || !dogName || interest === "What interests you most?") {
         feedback.textContent = 'Please fill out all fields.';
         feedback.classList.add('visible');
         feedback.style.color = 'crimson';
         return;
       }
-      feedback.textContent = 'Thank you! We will contact you soon.';
+      
+      // Simple email validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        feedback.textContent = 'Please enter a valid email address.';
+        feedback.classList.add('visible');
+        feedback.style.color = 'crimson';
+        return;
+      }
+      
+      feedback.textContent = `Welcome to Wagglo, ${name} and ${dogName}! Check your email for next steps.`;
       feedback.classList.add('visible');
       feedback.style.color = '';
-      setTimeout(() => feedback.classList.remove('visible'), 4000);
+      setTimeout(() => feedback.classList.remove('visible'), 5000);
       this.reset();
     });
-    
-    // Timeline content
-    const timelineContent = [
-      {
-        title: "Morning Routine",
-        description: "Your pet starts the day with 15 minutes of activity followed by breakfast. The AI system tracks eating habits and energy levels to ensure optimal nutrition."
-      },
-      {
-        title: "Midday Activities",
-        description: "During midday, your pet enjoys playtime and rest. The system monitors activity patterns to ensure they're getting enough exercise without overexertion."
-      },
-      {
-        title: "Afternoon Relaxation",
-        description: "Afternoon is for relaxation and naps. Our sensors track sleep quality and duration, providing insights into your pet's rest patterns."
-      },
-      {
-        title: "Evening Wind Down",
-        description: "Evening brings dinner and family time. The system tracks social interactions and monitors for any signs of stress or anxiety."
-      },
-      {
-        title: "Nighttime Monitoring",
-        description: "While you sleep, our AI continues monitoring your pet's movements and rest patterns, alerting you to any unusual nighttime activity."
-      }
-    ];
-    
-    function showTimelineContent(index) {
-      document.querySelectorAll('.timeline-item').forEach((item, i) => {
-        item.classList.toggle('active', i === index);
-      });
-      
-      document.getElementById('timeline-title').textContent = timelineContent[index].title;
-      document.getElementById('timeline-description').textContent = timelineContent[index].description;
-    }
-    
-    // Pet interaction functions
-    function interactWithPet() {
-      const pet = document.querySelector('.pet-body');
-      const status = document.querySelector('.pet-status');
-      
-      pet.style.transform = 'scale(1.2)';
-      status.textContent = "Pet is playing happily!";
-      status.style.opacity = "1";
-
-      setTimeout(() => {
-        pet.style.transform = 'scale(1)';
-        setTimeout(() => {
-          status.style.opacity = "0";
-        }, 2000);
-      }, 1000);
-    }
-    
-    function feedPet(e) {
-      e.stopPropagation();
-      const food = document.querySelector('.pet-food');
-      const status = document.querySelector('.pet-status');
-      
-      food.style.animation = 'bounce 0.5s ease';
-      status.textContent = "Feeding time! Yummy!";
-      status.style.opacity = "1";
-      
-      setTimeout(() => {
-        food.style.animation = '';
-        setTimeout(() => {
-          status.style.opacity = "0";
-        }, 2000);
-      }, 500);
-    }
-    
-    // 3D Device Viewer
-    let scene, camera, renderer, device;
-    let targetRotation = { x: 0, y: Math.PI / 4 };
-    let currentRotation = { x: 0, y: Math.PI / 4 };
-    
-    function initDeviceViewer() {
-      const canvas = document.getElementById('device-canvas');
-      
-      // Scene setup
-      scene = new THREE.Scene();
-      scene.background = new THREE.Color(0xf0f8ff);
-      
-      // Camera setup
-      camera = new THREE.PerspectiveCamera(50, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
-      camera.position.z = 15;
-      
-      // Renderer setup
-      renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
-      renderer.setSize(canvas.clientWidth, canvas.clientHeight);
-      renderer.setPixelRatio(window.devicePixelRatio);
-      
-      // Lights
-      const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
-      scene.add(ambientLight);
-      
-      const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-      directionalLight.position.set(5, 5, 5);
-      scene.add(directionalLight);
-      
-      // Device model
-      const geometry = new THREE.BoxGeometry(4, 1, 6);
-      const material = new THREE.MeshPhongMaterial({ 
-        color: 0x3a8cae,
-        shininess: 100
-      });
-      
-      device = new THREE.Mesh(geometry, material);
-      scene.add(device);
-      
-      // Screen
-      const screenGeometry = new THREE.BoxGeometry(3.5, 0.1, 5.5);
-      const screenMaterial = new THREE.MeshPhongMaterial({ 
-        color: 0x1a1a1a,
-        emissive: 0x64b6ac,
-        emissiveIntensity: 0.3
-      });
-      
-      const screen = new THREE.Mesh(screenGeometry, screenMaterial);
-      screen.position.y = 0.6;
-      device.add(screen);
-      
-      // Camera lens
-      const lensGeometry = new THREE.SphereGeometry(0.2, 16, 16);
-      const lensMaterial = new THREE.MeshPhongMaterial({ 
-        color: 0x000000,
-        emissive: 0x222222
-      });
-      
-      const lens = new THREE.Mesh(lensGeometry, lensMaterial);
-      lens.position.set(0, 0.6, 3.1);
-      device.add(lens);
-      
-      // Controls
-      const controls = new THREE.OrbitControls(camera, renderer.domElement);
-      controls.enableZoom = true;
-      controls.enablePan = false;
-      controls.enableDamping = true;
-      controls.dampingFactor = 0.05;
-      
-      // Animation loop
-      function animate() {
-        requestAnimationFrame(animate);
-        
-        // Apply damping to rotation
-        currentRotation.y += (targetRotation.y - currentRotation.y) * 0.1;
-        currentRotation.x += (targetRotation.x - currentRotation.x) * 0.1;
-        
-        device.rotation.y = currentRotation.y;
-        device.rotation.x = currentRotation.x;
-        
-        controls.update();
-        renderer.render(scene, camera);
-      }
-      
-      animate();
-      
-      // Handle window resize
-      window.addEventListener('resize', () => {
-        camera.aspect = canvas.clientWidth / canvas.clientHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(canvas.clientWidth, canvas.clientHeight);
-      });
-    }
-    
-    function rotateDevice(view) {
-      switch(view) {
-        case 'front':
-          targetRotation.x = 0;
-          targetRotation.y = Math.PI / 4;
-          break;
-        case 'side':
-          targetRotation.x = 0;
-          targetRotation.y = 0;
-          break;
-        case 'top':
-          targetRotation.x = -Math.PI / 3;
-          targetRotation.y = Math.PI / 4;
-          break;
-      }
-    }
     
     // Set up intersection observers for scroll animations
     const observerOptions = {
@@ -1913,12 +1581,14 @@
         if (entry.isIntersecting) {
           entry.target.classList.add('active');
           
-          // Special animations for specific sections
-          if (entry.target.id === 'features') {
-            animateValue('happy-pets', 0, 12847, 2000);
-            animateValue('alerts-sent', 0, 3200000, 2000);
-            animateValue('countries', 0, 64, 1500);
-            animateValue('response-time', 0, 2.7, 1500);
+          // Special animations for stats section
+          if (entry.target.querySelector('#happy-dogs')) {
+            setTimeout(() => {
+              animateValue('happy-dogs', 0, 8500, 2000);
+              animateValue('adventures', 0, 45000, 2000);
+              animateValue('communities', 0, 150, 1500);
+              animateValue('satisfaction', 0, 97, 1500);
+            }, 200);
           }
         }
       });
@@ -1929,15 +1599,14 @@
       observer.observe(section);
     });
     
-    // Observe all cards and gallery items
-    document.querySelectorAll('.card, .gallery-item').forEach(item => {
+    // Observe all cards and activity items
+    document.querySelectorAll('.card, .activity-item').forEach(item => {
       observer.observe(item);
     });
     
     // Initialize when page loads
     window.addEventListener('DOMContentLoaded', () => {
-      initCharts();
-      initDeviceViewer();
+      console.log('Wagglo website loaded! 🐕');
     });
   </script>
 </body>
