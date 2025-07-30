@@ -155,6 +155,7 @@
       margin: 0 auto;
       transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), opacity 0.6s;
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       border: 1px solid rgba(255, 255, 255, 0.18);
       height: 48px;
       overflow-x: auto;
@@ -181,8 +182,9 @@
       font-weight: 500;
       color: var(--dark-brown);
       user-select: none;
+      -webkit-user-select: none;
       padding: 0.3rem 1rem;
-      font-size: 0.78rem; /* reduced from 0.95rem */
+      font-size: 0.78rem;
       letter-spacing: 0.04em;
       transition: all 0.3s ease-out;
       position: relative;
@@ -348,7 +350,7 @@
       transform: scale(1.1) rotate(5deg);
     }
     
-    /* Feature Grid - Fixed Alignment */
+    /* Feature Grid */
     .feature-grid {
       display: grid;
       gap: 2rem;
@@ -383,12 +385,6 @@
       text-align: center;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
       transition: all 0.3s ease;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-    }
-    
-    .stat-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(100, 182, 172, 0.15);
     }
     
     .stat-value {
@@ -398,35 +394,18 @@
       margin-bottom: 0.5rem;
     }
     
-    /* Health Dashboard */
-    .health-dashboard {
-      background: var(--card-bg);
-      border-radius: 20px;
-      padding: 2.5rem;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-      max-width: 1000px;
-      margin: 3rem auto;
-      position: relative;
-      overflow: hidden;
-    }
-    
     .dashboard-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 2rem;
-      margin-top: 2rem;
+      margin: 2rem 0;
     }
     
     .dashboard-card {
-      background: rgba(100, 182, 172, 0.05);
-      border-radius: 15px;
+      background: var(--card-bg);
       padding: 1.5rem;
-      transition: all 0.3s ease;
-    }
-    
-    .dashboard-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
     }
     
     .dashboard-header {
@@ -439,6 +418,19 @@
     .dashboard-header h3 {
       font-size: 1.5rem;
       color: var(--primary);
+    }
+    
+    .date-filter select {
+      padding: 0.5rem 1rem;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background: var(--card-bg);
+      color: var(--text);
+    }
+    
+    .health-dashboard {
+      max-width: 1200px;
+      margin: 0 auto;
     }
     
     /* Image Gallery */
@@ -581,39 +573,12 @@
       cursor: pointer;
       outline: none;
     }
+    
     .carousel-arrow:focus,
     .carousel-arrow:hover {
       background: var(--primary-dark);
       color: #fff;
       transform: scale(1.08);
-    }
-
-    @media (max-width: 900px) {
-      .testimonial-carousel {
-      max-width: 98vw;
-      min-height: 380px;
-      }
-      .testimonial {
-      max-width: 98vw;
-      padding: 1.5rem 0.7rem 1.5rem 0.7rem;
-      border-radius: 18px;
-      }
-      .testimonial-quote {
-      max-width: 95vw;
-      font-size: 1rem;
-      }
-    }
-    @media (max-width: 600px) {
-      .testimonial-carousel {
-      min-height: 420px;
-      padding-bottom: 4rem;
-      }
-      .carousel-arrows {
-      padding: 0 0.5rem;
-      }
-      .testimonial {
-      padding: 1.2rem 0.3rem 1.2rem 0.3rem;
-      }
     }
 
     /* Animated Background Elements */
@@ -639,6 +604,7 @@
       transition: all 0.3s ease;
       box-shadow: 0 5px 15px rgba(100, 182, 172, 0.3);
       font-size: 1rem;
+      text-decoration: none;
     }
     
     .btn:hover {
@@ -661,6 +627,10 @@
     .btn-outline:hover {
       background: white;
       color: var(--primary);
+    }
+    
+    .btn-full-width {
+      width: 100%;
     }
     
     .ripple {
@@ -706,6 +676,55 @@
       font-size: 1.1rem;
       color: var(--text);
       opacity: 0.8;
+    }
+    
+    /* Contact Section Styles */
+    .contact-card {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .contact-card h3 {
+      text-align: center;
+    }
+    
+    .contact-card p {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    
+    .contact-form {
+      display: grid;
+      gap: 1rem;
+    }
+    
+    .form-input {
+      padding: 1rem;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      background: var(--white);
+      color: var(--text);
+      font-size: 1rem;
+    }
+    
+    .form-select {
+      padding: 1rem;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      background: var(--white);
+      color: var(--text);
+      font-size: 1rem;
+    }
+    
+    .form-feedback {
+      text-align: center;
+      padding: 1rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .form-feedback.visible {
+      opacity: 1;
     }
     
     /* Animated Progress Bars */
@@ -915,6 +934,7 @@
       border-radius: 50%;
       color: white;
       transition: all 0.3s ease;
+      text-decoration: none;
     }
     
     .social-links a:hover {
@@ -953,7 +973,9 @@
       height: 45px;
       background: rgba(255, 255, 255, 0.15);
       backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
     }
+    
     .mode-toggle:focus,
     .mode-toggle:hover {
       opacity: 0.85;
@@ -962,9 +984,15 @@
       transform: scale(1.15);
       outline: none;
     }
+    
     .mode-toggle i {
       pointer-events: none;
       transition: color 0.3s;
+    }
+    
+    /* Special section backgrounds */
+    .section-alt-bg {
+      background: rgba(100, 182, 172, 0.05);
     }
     
     /* Responsive Adjustments */
@@ -1001,7 +1029,38 @@
         flex-direction: column;
         gap: 1rem;
       }
+
+      .testimonial-carousel {
+        max-width: 98vw;
+        min-height: 380px;
+      }
       
+      .testimonial {
+        max-width: 98vw;
+        padding: 1.5rem 0.7rem 1.5rem 0.7rem;
+        border-radius: 18px;
+      }
+      
+      .testimonial-quote {
+        max-width: 95vw;
+        font-size: 1rem;
+      }
+    }
+    
+    @media (max-width: 600px) {
+      .testimonial-carousel {
+        min-height: 420px;
+        padding-bottom: 4rem;
+      }
+      
+      .carousel-arrows {
+        padding: 0 0.5rem;
+      }
+      
+      .testimonial {
+        padding: 1.2rem 0.3rem 1.2rem 0.3rem;
+      }
+    }
     
     @media (max-width: 480px) {
       .top-menu-wrapper {
@@ -1042,19 +1101,20 @@
   </style>
 </head>
 <body>
-    <div class="mode-toggle" tabindex="0" aria-label="Toggle light/dark mode" onclick="toggleMode()">
-      <i class="fas fa-moon"></i>
-    </div>
+  <!-- Mode Toggle -->
+  <button class="mode-toggle" onclick="toggleMode()" aria-label="Toggle dark/light mode">
+    <i class="fas fa-moon"></i>
+  </button>
 
-  <!-- Navigation Menu -->
-  <div class="top-menu-wrapper" role="navigation" aria-label="Main navigation menu" id="main-menu">
+  <!-- Top Menu -->
+  <div class="top-menu-wrapper" id="main-menu">
     <div class="top-menu-inner">
       <div class="top-menu-item active" onclick="scrollToSection('hero')">Home</div>
       <div class="top-menu-item" onclick="scrollToSection('features')">Features</div>
-      <div class="top-menu-item" onclick="scrollToSection('health')">Health Dashboard</div>
       <div class="top-menu-item" onclick="scrollToSection('showcase')">Product</div>
-      <div class="top-menu-item" onclick="scrollToSection('testimonials')">Testimonials</div>
-      <div class="top-menu-item" onclick="scrollToSection('timeline')">Daily Routine</div>
+      <div class="top-menu-item" onclick="scrollToSection('health')">Health</div>
+      <div class="top-menu-item" onclick="scrollToSection('timeline')">Timeline</div>
+      <div class="top-menu-item" onclick="scrollToSection('testimonials')">Reviews</div>
       <div class="top-menu-item" onclick="scrollToSection('contact')">Contact</div>
     </div>
   </div>
@@ -1094,7 +1154,7 @@
   </script>
 
   <!-- Hero Section -->
-  <section id="hero" class="hero scroll-section" style="position:relative;">
+  <section id="hero" class="hero scroll-section">
     <div class="hero-content">
       <h1>Intelligent Pet Care for the Modern Family</h1>
       <p>AI-powered monitoring that understands your pet's unique behaviors and needs, providing real-time insights and alerts</p>
@@ -1167,7 +1227,7 @@
   </section>
 
   <!-- Stats Dashboard -->
-  <section class="scroll-section" style="background: rgba(100, 182, 172, 0.05);">
+  <section class="scroll-section section-alt-bg">
     <div class="section-heading">
       <h2>By The Numbers</h2>
       <p>Quantifying the impact of our pet monitoring technology</p>
@@ -1211,7 +1271,7 @@
       </div>
     </div>
     
-    <div class="feature-grid" style="margin-top: 3rem;">
+    <div class="feature-grid">
       <div class="feature-card">
         <div class="card">
           <div class="card-icon">
@@ -1245,7 +1305,7 @@
       <div class="dashboard-header">
         <h3>Luna's Health Metrics</h3>
         <div class="date-filter">
-          <select id="date-range">
+          <select id="date-range" class="form-select" aria-label="Select date range for health metrics">
             <option>Last 24 hours</option>
             <option>Last 7 days</option>
             <option>Last 30 days</option>
@@ -1278,7 +1338,7 @@
   </section>
 
   <!-- Pet Timeline -->
-  <section id="timeline" class="scroll-section" style="background: rgba(100, 182, 172, 0.05);">
+  <section id="timeline" class="scroll-section section-alt-bg">
     <div class="section-heading">
       <h2>Daily Routine</h2>
       <p>Track your pet's activities throughout the day</p>
@@ -1372,25 +1432,25 @@
       <p>Join thousands of pet owners who trust our technology</p>
     </div>
     
-    <div class="feature-card" style="max-width: 600px; margin: 0 auto;">
+    <div class="feature-card contact-card">
       <div class="card">
         <div class="card-icon">
           <i class="fas fa-paw"></i>
         </div>
-        <h3 style="text-align: center;">Request More Information</h3>
-        <p style="text-align: center; margin-bottom: 2rem;">Our team will contact you to discuss the perfect solution for your pet</p>
+        <h3 class="contact-card h3">Request More Information</h3>
+        <p class="contact-card p">Our team will contact you to discuss the perfect solution for your pet</p>
         
-        <form id="contact-form" style="display: grid; gap: 1rem;">
-          <input type="text" id="name" placeholder="Your Name" style="padding: 1rem; border-radius: 8px; border: 1px solid #ddd;">
-          <input type="email" id="email" placeholder="Email Address" style="padding: 1rem; border-radius: 8px; border: 1px solid #ddd;">
-          <select id="interest" style="padding: 1rem; border-radius: 8px; border: 1px solid #ddd;">
+        <form id="contact-form" class="contact-form">
+          <input type="text" id="name" placeholder="Your Name" class="form-input" aria-label="Your name">
+          <input type="email" id="email" placeholder="Email Address" class="form-input" aria-label="Your email address">
+          <select id="interest" class="form-select" aria-label="Select your area of interest">
             <option>I'm interested in...</option>
             <option>Home Monitoring System</option>
             <option>Commercial Solutions</option>
             <option>Veterinary Partnership</option>
           </select>
-          <button type="submit" class="btn" style="width: 100%;">Submit Request</button>
-          <div class="form-feedback" id="form-feedback" style="text-align: center; padding: 1rem;"></div>
+          <button type="submit" class="btn btn-full-width">Submit Request</button>
+          <div class="form-feedback" id="form-feedback"></div>
         </form>
       </div>
     </div>
@@ -1425,11 +1485,11 @@
     </div>
     
     <div class="social-links">
-      <a href="#"><i class="fab fa-facebook-f"></i></a>
-      <a href="#"><i class="fab fa-twitter"></i></a>
-      <a href="#"><i class="fab fa-instagram"></i></a>
-      <a href="#"><i class="fab fa-linkedin-in"></i></a>
-      <a href="#"><i class="fab fa-youtube"></i></a>
+      <a href="#" aria-label="Follow us on Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" aria-label="Follow us on Twitter"><i class="fab fa-twitter"></i></a>
+      <a href="#" aria-label="Follow us on Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="#" aria-label="Follow us on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="#" aria-label="Watch us on YouTube"><i class="fab fa-youtube"></i></a>
     </div>
     
     <div class="copyright">
@@ -1558,12 +1618,17 @@
         top: element.offsetTop - 80,
         behavior: 'smooth'
       });
-      
       // Update active menu item
       document.querySelectorAll('.top-menu-item').forEach(item => {
         item.classList.remove('active');
       });
-      event.target.classList.add('active');
+      // Find the menu item that matches the section
+      const menuItems = document.querySelectorAll('.top-menu-item');
+      menuItems.forEach(item => {
+        if (item.getAttribute('onclick') && item.getAttribute('onclick').includes(id)) {
+          item.classList.add('active');
+        }
+      });
     }
     
     // Ripple button effect
@@ -1578,7 +1643,7 @@
         ripple.style.top = `${y}px`;
         
         this.appendChild(ripple);
-        
+
         setTimeout(() => {
           ripple.remove();
         }, 600);
@@ -1700,7 +1765,7 @@
       pet.style.transform = 'scale(1.2)';
       status.textContent = "Pet is playing happily!";
       status.style.opacity = "1";
-      
+
       setTimeout(() => {
         pet.style.transform = 'scale(1)';
         setTimeout(() => {
