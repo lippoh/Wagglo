@@ -210,7 +210,7 @@
       min-height: 44px; /* Touch target size */
       min-width: 44px;
     }
-
+    
     .top-menu-item::after {
       content: "";
       position: absolute;
@@ -245,6 +245,51 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
+    }
+    
+    /* Logo Styles - Desktop: Next to Menu, Mobile: In Hero */
+    .hero-logo {
+      position: absolute;
+      top: clamp(20px, 4vw, 40px);
+      left: clamp(20px, 4vw, 40px);
+      z-index: 10;
+      animation: fadeIn 1s ease 0.5s both;
+    }
+    
+    .hero-logo img {
+      height: clamp(40px, 8vw, 80px);
+      width: auto;
+      object-fit: contain;
+      filter: brightness(1.1) contrast(1.1);
+      transition: all 0.3s ease;
+    }
+    
+    .hero-logo img:hover {
+      transform: scale(1.05);
+      filter: brightness(1.2) contrast(1.2);
+    }
+    
+    /* Desktop Logo Positioned Next to Menu */
+    .desktop-logo {
+      position: fixed;
+      top: clamp(8px, 2vw, 10px);
+      left: calc(46% - min(410px, 49vw) - clamp(80px, 12vw, 120px)); /* Position to the left of menu with spacing */
+      z-index: 1001;
+      display: none; /* Hidden by default */
+      animation: fadeIn 1s ease 0.5s both;
+    }
+    
+    .desktop-logo img {
+      height: clamp(82px, 10vw, 90px);
+      width: auto;
+      object-fit: contain;
+      filter: brightness(1.1) contrast(1.1);
+      transition: all 0.3s ease;
+    }
+    
+    .desktop-logo img:hover {
+      transform: scale(1.05);
+      filter: brightness(1.2) contrast(1.2);
     }
     
     .hero-model {
@@ -309,7 +354,7 @@
       align-items: center;
       justify-content: center;
     }
-
+    
     .hero h1 {
       font-size: clamp(2rem, 8vw, 4rem);
       margin-bottom: clamp(1rem, 3vw, 1.5rem);
@@ -662,11 +707,11 @@
       justify-content: center;
       white-space: nowrap;
     }
-
+    
     .btn-cta-orange {
-      background: #F3482B;
+      background: #FF631A;
       color: #fff;
-      border: 1px solid #F3482B;
+      border: 1px solid #FF631A;
     }
     
     .btn-cta-orange:hover {
@@ -929,6 +974,17 @@
       background: rgba(100, 182, 172, 0.05);
     }
 
+/* Desktop version - show logo NEXT to menu */
+@media (min-width: 769px) {
+  .desktop-logo {
+    display: block; /* Show desktop logo */
+  }
+  
+  .hero-logo {
+    display: none; /* Hide hero logo on desktop */
+  }
+}
+
 /* Enhanced Mobile Responsive Styles */
 @media (max-width: 1024px) {
   .hero-model {
@@ -940,12 +996,29 @@
   .hero-content {
     padding-left: clamp(2rem, 8vw, 4rem);
   }
+  
+  .hero-logo {
+    top: clamp(15px, 3vw, 30px);
+    left: clamp(15px, 3vw, 30px);
+  }
+  
+  .hero-logo img {
+    height: clamp(35px, 6vw, 60px);
+  }
 }
 
 @media (max-width: 768px) {
   /* Hide top menu on mobile */
   .top-menu-wrapper {
     display: none;
+  }
+
+  .desktop-logo {
+    display: none; /* Hide desktop logo on mobile */
+  }
+  
+  .hero-logo {
+    display: block; /* Keep original logo visible on mobile */
   }
 
   /* Hero Section Mobile Optimizations */
@@ -956,6 +1029,15 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+  }
+  
+  .hero-logo {
+    top: clamp(15px, 3vw, 25px);
+    left: clamp(15px, 3vw, 25px);
+  }
+  
+  .hero-logo img {
+    height: clamp(65px, 11vw, 85px); /* Increased from clamp(40px, 7vw, 55px) */
   }
   
   .hero-model {
@@ -1081,6 +1163,15 @@
     padding: 2.5rem 1rem 2rem;
   }
   
+  .hero-logo {
+    top: clamp(10px, 2vw, 20px);
+    left: clamp(10px, 2vw, 20px);
+  }
+  
+  .hero-logo img {
+    height: clamp(60px, 9vw, 80px); /* Increased from clamp(25px, 4vw, 35px) for bigger mobile logo */
+  }
+  
   .hero-model {
     width: min(1200px, 240vw); /* Even bigger - increased from 1000px/198vw */
     height: min(1200px, 240vw); /* Even bigger - increased from 1000px/198vw */
@@ -1141,6 +1232,11 @@
     <i class="fas fa-moon"></i>
   </button>
 
+  <!-- Desktop Logo - Next to Menu -->
+  <div class="desktop-logo">
+    <img src="content/logo/logo.png" alt="Wagglo Logo" />
+  </div>
+
   <!-- Top Menu -->
   <div class="top-menu-wrapper" id="main-menu">
     <div class="top-menu-inner">
@@ -1156,6 +1252,11 @@
 
   <!-- Hero Section -->
   <section id="hero" class="hero scroll-section" style="position:relative;">
+    <!-- Mobile/Tablet Logo -->
+    <div class="hero-logo">
+      <img src="content/logo/logo.png" alt="Wagglo Logo" />
+    </div>
+    
     <div class="hero-model">
       <canvas id="three-canvas"></canvas>
     </div>
@@ -1164,10 +1265,10 @@
       <p>Discover unique dog-friendly experiences and connect with your local dog-loving community</p>
       <div class="hero-buttons">
         <button class="btn btn-outline" onclick="scrollToSection('contact')">
-          <i class="fas fa-paw"></i> Find Your Dog's Next Adventure
+          <i class="fas fa-paw"></i>&nbsp;Find Your Dog's Next Adventure
         </button>
         <button class="btn btn-cta-orange" onclick="scrollToSection('what-is-wagglo')">
-          <i class="fas fa-heart"></i> Join the Pack
+          <i class="fas fa-heart"></i>&nbsp;Join the Pack
         </button>
       </div>
     </div>
