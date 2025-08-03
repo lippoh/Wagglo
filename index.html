@@ -4,15 +4,27 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
   <title>Wagglo | Give Your Dog More Than Walks</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   
-  <!-- Three.js and GLTFLoader -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+  <!-- PERFORMANCE OPTIMIZATION: Resource hints for faster DNS resolution and connection -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+  <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
   
+  <!-- PERFORMANCE OPTIMIZATION: Preload critical assets -->
+  <link rel="preload" href="content/logo/logo.png" as="image">
+  
+  <!-- PERFORMANCE OPTIMIZATION: Optimized Google Fonts loading - non-blocking with font-display swap -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@400;500;600;700&display=swap"></noscript>
+  
+  <!-- PERFORMANCE OPTIMIZATION: Font Awesome CSS loaded asynchronously -->
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
+  
+  <!-- PERFORMANCE OPTIMIZATION: Inline critical CSS for above-the-fold content -->
   <style>
+    /* Critical CSS - Above the fold content only */
     :root {
       --primary: #6ec1e4;
       --primary-dark: #3a8cae;
@@ -46,63 +58,6 @@
       --teal: #5aada3;
     }
     
-    /* Animation Keyframes */
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-15px); }
-    }
-    
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    
-    @keyframes scaleIn {
-      from { transform: scale(0.8); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-    
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-    }
-    
-    @keyframes borderGlow {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(100, 182, 172, 0.3); }
-      50% { box-shadow: 0 0 15px 5px rgba(100, 182, 172, 0.3); }
-    }
-    
-    @keyframes slideInLeft {
-      from { transform: translateX(-50px); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
-    }
-    
-    @keyframes slideInRight {
-      from { transform: translateX(50px); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
-    }
-    
-    @keyframes ripple {
-      0% { transform: scale(0); opacity: 1; }
-      100% { transform: scale(4); opacity: 0; }
-    }
-    
-    @keyframes bounce {
-      0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-      40% {transform: translateY(-20px);}
-      60% {transform: translateY(-10px);}
-    }
-
-    @keyframes modelHover {
-      0%, 100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-20px);
-      }
-    }
-    
-    /* Base Styles */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -125,23 +80,23 @@
                         radial-gradient(circle at 90% 80%, rgba(249, 181, 114, 0.05) 0%, transparent 20%);
     }
     
-    body.dark-mode {
-      background-image: radial-gradient(circle at 10% 20%, rgba(58, 140, 174, 0.05) 0%, transparent 20%),
-                        radial-gradient(circle at 90% 80%, rgba(249, 181, 114, 0.05) 0%, transparent 20%);
+    /* Critical animations for above-fold content */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
     }
     
-    /* Smooth Scrolling Sections */
-    .scroll-section {
-      min-height: 100vh;
-      padding: clamp(3rem, 8vw, 6rem) clamp(1rem, 4vw, 2rem);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     
-    /* Interactive Menu */
+    @keyframes modelHover {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+    
+    /* Top Menu - Critical for first paint */
     .top-menu-wrapper {
       position: fixed;
       top: clamp(8px, 2vw, 16px);
@@ -207,7 +162,7 @@
       max-width: clamp(120px, 25vw, 160px);
       overflow: hidden;
       text-overflow: ellipsis;
-      min-height: 44px; /* Touch target size */
+      min-height: 44px;
       min-width: 44px;
     }
     
@@ -232,7 +187,7 @@
       color: var(--primary);
     }
     
-    /* Enhanced Hero Section */
+    /* Hero Section - Critical for first paint */
     .hero {
       background: linear-gradient(135deg, var(--primary), var(--primary-dark));
       color: white;
@@ -247,7 +202,6 @@
       align-items: center;
     }
     
-    /* Logo Styles - Desktop: Next to Menu, Mobile: In Hero */
     .hero-logo {
       position: absolute;
       top: clamp(20px, 4vw, 40px);
@@ -264,18 +218,12 @@
       transition: all 0.3s ease;
     }
     
-    .hero-logo img:hover {
-      transform: scale(1.05);
-      filter: brightness(1.2) contrast(1.2);
-    }
-    
-    /* Desktop Logo Positioned Next to Menu */
     .desktop-logo {
       position: fixed;
       top: clamp(8px, 2vw, 10px);
-      left: calc(46% - min(410px, 49vw) - clamp(80px, 12vw, 120px)); /* Position to the left of menu with spacing */
+      left: calc(46% - min(410px, 49vw) - clamp(80px, 12vw, 120px));
       z-index: 1001;
-      display: none; /* Hidden by default */
+      display: none;
       animation: fadeIn 1s ease 0.5s both;
     }
     
@@ -285,11 +233,6 @@
       object-fit: contain;
       filter: brightness(1.1) contrast(1.1);
       transition: all 0.3s ease;
-    }
-    
-    .desktop-logo img:hover {
-      transform: scale(1.05);
-      filter: brightness(1.2) contrast(1.2);
     }
     
     .hero-model {
@@ -322,26 +265,6 @@
 
     #three-canvas.loaded {
       opacity: 1;
-    }
-
-    @keyframes modelHover {
-      0%, 100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-32px);
-      }
-    }
-    
-    .hero::before {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 10px;
-      background: linear-gradient(90deg, var(--primary), var(--secondary), var(--primary));
-      animation: borderGlow 4s infinite;
     }
     
     .hero-content {
@@ -380,310 +303,6 @@
       flex-wrap: wrap;
     }
     
-    .scroll-indicator {
-      position: absolute;
-      bottom: clamp(20px, 5vw, 30px);
-      left: 50%;
-      transform: translateX(-50%);
-      animation: float 2.5s ease-in-out infinite;
-      z-index: 3;
-    }
-    
-    .scroll-indicator i {
-      font-size: clamp(1.2rem, 4vw, 1.8rem);
-      color: white;
-    }
-    
-    /* Interactive Cards */
-    .card {
-      background: var(--card-bg);
-      border-radius: clamp(12px, 3vw, 18px);
-      padding: clamp(1.5rem, 5vw, 2.5rem);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-      position: relative;
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      transform: translateY(30px);
-      opacity: 0;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-    }
-    
-    .card.active {
-      transform: translateY(0);
-      opacity: 1;
-    }
-    
-    .card::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 5px;
-      background: linear-gradient(90deg, var(--primary), var(--secondary));
-    }
-    
-    .card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 40px rgba(100, 182, 172, 0.2);
-    }
-    
-    .card-icon {
-      width: clamp(50px, 12vw, 70px);
-      height: clamp(50px, 12vw, 70px);
-      background: rgba(100, 182, 172, 0.1);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: clamp(1rem, 3vw, 1.5rem);
-      font-size: clamp(1.2rem, 4vw, 1.8rem);
-      color: var(--primary);
-      transition: all 0.3s ease;
-    }
-    
-    .card:hover .card-icon {
-      background: rgba(100, 182, 172, 0.2);
-      transform: scale(1.1) rotate(5deg);
-    }
-    
-    /* Feature Grid */
-    .feature-grid {
-      display: grid;
-      gap: clamp(1rem, 4vw, 2rem);
-      grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    
-    .feature-card {
-      display: flex;
-    }
-    
-    .order-0 {
-      transition-delay: 0s;
-    }
-    .order-1 {
-      transition-delay: 0.1s;
-    }
-    .order-2 {
-      transition-delay: 0.2s;
-    }
-    
-    /* Stats Dashboard */
-    .stats-dashboard {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
-      gap: clamp(1rem, 3vw, 1.5rem);
-      margin: clamp(2rem, 5vw, 3rem) auto;
-      max-width: 1000px;
-    }
-    
-    .stat-card {
-      background: var(--card-bg);
-      padding: clamp(1rem, 3vw, 1.5rem);
-      border-radius: clamp(8px, 2vw, 12px);
-      text-align: center;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-      transition: all 0.3s ease;
-    }
-    
-    .stat-value {
-      font-size: clamp(1.8rem, 6vw, 2.5rem);
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: clamp(0.3rem, 1vw, 0.5rem);
-    }
-    
-    /* How It Works Steps */
-    .steps-container {
-      max-width: 1000px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
-      gap: clamp(2rem, 5vw, 3rem);
-    }
-    
-    .step-card {
-      text-align: center;
-      position: relative;
-    }
-    
-    .step-number {
-      width: clamp(60px, 15vw, 80px);
-      height: clamp(60px, 15vw, 80px);
-      background: var(--primary);
-      color: white;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: clamp(1.5rem, 4vw, 2rem);
-      font-weight: 700;
-      margin: 0 auto clamp(1.5rem, 3vw, 2rem);
-      box-shadow: 0 10px 30px rgba(100, 182, 172, 0.3);
-    }
-    
-    .step-card h3 {
-      font-size: clamp(1.2rem, 3vw, 1.5rem);
-      margin-bottom: clamp(0.8rem, 2vw, 1rem);
-      color: var(--dark-brown);
-    }
-    
-    /* Activity Showcase */
-    .activity-showcase {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
-      gap: clamp(1.5rem, 4vw, 2rem);
-      margin: clamp(2rem, 5vw, 3rem) auto;
-      max-width: 1100px;
-    }
-    
-    .activity-item {
-      border-radius: clamp(8px, 2vw, 12px);
-      overflow: hidden;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-      transition: all 0.4s ease;
-      transform: scale(0.95);
-      opacity: 0;
-      height: clamp(250px, 50vw, 300px);
-      position: relative;
-      cursor: pointer;
-      background: var(--card-bg);
-    }
-    
-    .activity-item.active {
-      transform: scale(1);
-      opacity: 1;
-    }
-    
-    .activity-item:hover {
-      transform: scale(1.05);
-      box-shadow: 0 15px 40px rgba(100, 182, 172, 0.2);
-    }
-    
-    .activity-icon {
-      font-size: clamp(2rem, 6vw, 3rem);
-      color: var(--primary);
-      margin: clamp(1.5rem, 4vw, 2rem) auto clamp(0.8rem, 2vw, 1rem);
-      display: block;
-      text-align: center;
-    }
-    
-    .activity-content {
-      padding: clamp(1rem, 3vw, 1.5rem);
-      text-align: center;
-    }
-    
-    .activity-content h4 {
-      font-size: clamp(1.1rem, 2.8vw, 1.3rem);
-      margin-bottom: clamp(0.3rem, 1vw, 0.5rem);
-      color: var(--dark-brown);
-    }
-    
-    /* Testimonials */
-    .testimonial-carousel {
-      max-width: min(900px, 95vw);
-      margin: clamp(2rem, 5vw, 3rem) auto;
-      position: relative;
-      overflow: visible;
-      padding: clamp(1.5rem, 4vw, 2rem) clamp(0.5rem, 2vw, 1rem) clamp(2.5rem, 6vw, 3.5rem);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: clamp(280px, 60vw, 340px);
-    }
-
-    .testimonial {
-      background: var(--card-bg);
-      padding: clamp(1.5rem, 4vw, 2.2rem) clamp(1.2rem, 3vw, 2rem) clamp(1.2rem, 3vw, 2rem);
-      border-radius: clamp(16px, 4vw, 24px);
-      box-shadow: 0 8px 32px rgba(100, 182, 172, 0.10);
-      text-align: center;
-      opacity: 0;
-      transition: opacity 0.5s, transform 0.5s;
-      transform: scale(0.97) translateY(30px);
-      position: absolute;
-      left: 0;
-      right: 0;
-      margin: 0 auto;
-      width: 100%;
-      max-width: min(700px, 95vw);
-      pointer-events: none;
-      z-index: 0;
-      display: block;
-    }
-
-    .testimonial.active {
-      opacity: 1;
-      transform: scale(1) translateY(0);
-      z-index: 2;
-      pointer-events: auto;
-      position: relative;
-    }
-
-    .testimonial-quote {
-      font-size: clamp(1rem, 2.5vw, 1.15rem);
-      font-style: italic;
-      margin-bottom: clamp(1rem, 2.5vw, 1.2rem);
-      line-height: 1.7;
-      max-width: min(600px, 95vw);
-      margin-left: auto;
-      margin-right: auto;
-      color: var(--text);
-    }
-
-    .testimonial-author {
-      font-weight: 600;
-      color: var(--primary);
-      font-size: clamp(0.9rem, 2.2vw, 1.05rem);
-      margin-top: clamp(0.8rem, 2vw, 1rem);
-    }
-
-    .carousel-arrows {
-      position: absolute;
-      bottom: clamp(0.3rem, 1vw, 0.5rem);
-      left: 0;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      z-index: 10;
-      pointer-events: none;
-      padding: 0 clamp(1rem, 3vw, 1.5rem);
-    }
-
-    .carousel-arrow {
-      pointer-events: auto;
-      background: var(--primary);
-      color: #fff;
-      border: none;
-      border-radius: 50%;
-      width: clamp(40px, 10vw, 44px);
-      height: clamp(40px, 10vw, 44px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: clamp(1.1rem, 3vw, 1.3rem);
-      box-shadow: 0 2px 8px rgba(100, 182, 172, 0.15);
-      transition: background 0.2s, color 0.2s, transform 0.2s;
-      cursor: pointer;
-      outline: none;
-      min-height: 44px; /* Touch target */
-      min-width: 44px;
-    }
-    
-    .carousel-arrow:focus,
-    .carousel-arrow:hover {
-      background: var(--primary-dark);
-      color: #fff;
-      transform: scale(1.08);
-    }
-    
-    /* Ripple Buttons */
     .btn {
       display: inline-block;
       padding: clamp(0.8rem, 2.5vw, 1rem) clamp(1.5rem, 4vw, 2.5rem);
@@ -699,7 +318,7 @@
       box-shadow: 0 5px 15px rgba(100, 182, 172, 0.3);
       font-size: clamp(0.9rem, 2.2vw, 1rem);
       text-decoration: none;
-      min-height: 44px; /* Touch target */
+      min-height: 44px;
       min-width: 44px;
       text-align: center;
       display: inline-flex;
@@ -714,219 +333,12 @@
       border: 1px solid #FF631A;
     }
     
-    .btn-cta-orange:hover {
-      background: #d95c3c;
-      border-color: #d95c3c;
-      color: #fff;
-    }
-    
-    .btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(100, 182, 172, 0.4);
-    }
-    
-    .btn-secondary {
-      background: white;
-      color: var(--primary);
-      border: 1px solid var(--primary);
-    }
-    
     .btn-outline {
       background: transparent;
       color: white;
       border: 2px solid white;
     }
     
-    .btn-outline:hover {
-      background: white;
-      color: var(--primary);
-    }
-    
-    .btn-full-width {
-      width: 100%;
-    }
-    
-    .ripple {
-      position: absolute;
-      background: rgba(255, 255, 255, 0.4);
-      border-radius: 50%;
-      transform: scale(0);
-      animation: ripple 0.6s linear;
-      pointer-events: none;
-    }
-    
-    /* Section Headings */
-    .section-heading {
-      text-align: center;
-      margin-bottom: clamp(2.5rem, 6vw, 4rem);
-      position: relative;
-    }
-    
-    .section-heading h2 {
-      font-size: clamp(2rem, 6vw, 2.8rem);
-      color: var(--dark-brown);
-      margin-bottom: clamp(0.8rem, 2vw, 1rem);
-      display: inline-block;
-      position: relative;
-      font-weight: 700;
-    }
-    
-    .section-heading h2::after {
-      content: "";
-      position: absolute;
-      bottom: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: clamp(60px, 15vw, 80px);
-      height: 4px;
-      background: var(--primary);
-      border-radius: 2px;
-    }
-    
-    .section-heading p {
-      max-width: min(700px, 90vw);
-      margin: 0 auto;
-      font-size: clamp(1rem, 2.5vw, 1.1rem);
-      color: var(--text);
-      opacity: 0.8;
-    }
-    
-    /* Contact Section Styles */
-    .contact-card {
-      max-width: min(600px, 95vw);
-      margin: 0 auto;
-    }
-    
-    .contact-card h3 {
-      text-align: center;
-    }
-    
-    .contact-card p {
-      text-align: center;
-      margin-bottom: clamp(1.5rem, 4vw, 2rem);
-    }
-    
-    .contact-form {
-      display: grid;
-      gap: clamp(0.8rem, 2vw, 1rem);
-    }
-    
-    .form-input,
-    .form-select {
-      padding: clamp(0.8rem, 2.5vw, 1rem);
-      border-radius: clamp(6px, 1.5vw, 8px);
-      border: 1px solid #ddd;
-      background: var(--white);
-      color: var(--text);
-      font-size: clamp(0.9rem, 2.2vw, 1rem);
-      min-height: 44px; /* Touch target */
-      width: 100%;
-    }
-    
-    .form-feedback {
-      text-align: center;
-      padding: clamp(0.8rem, 2vw, 1rem);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-    
-    .form-feedback.visible {
-      opacity: 1;
-    }
-    
-    /* Footer */
-    footer {
-      background: var(--primary);
-      color: white;
-      padding: clamp(2.5rem, 6vw, 4rem) clamp(1rem, 4vw, 2rem);
-      text-align: center;
-      position: relative;
-    }
-    
-    footer::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 10px;
-      background: linear-gradient(90deg, var(--primary), var(--secondary), var(--primary));
-    }
-    
-    .footer-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
-      gap: clamp(1.5rem, 4vw, 2rem);
-      text-align: left;
-      align-items: start;
-      justify-items: start;
-    }
-    
-    .footer-column h3 {
-      color: white;
-      margin-bottom: clamp(1rem, 3vw, 1.5rem);
-      font-size: clamp(1.1rem, 2.8vw, 1.3rem);
-    }
-    
-    .footer-column ul {
-      list-style: none;
-    }
-    
-    .footer-column ul li {
-      margin-bottom: clamp(0.6rem, 1.5vw, 0.8rem);
-    }
-    
-    .footer-column ul li a {
-      color: rgba(255, 255, 255, 0.8);
-      text-decoration: none;
-      transition: all 0.3s ease;
-      font-size: clamp(0.9rem, 2.2vw, 1rem);
-    }
-    
-    .footer-column ul li a:hover {
-      color: white;
-      padding-left: 5px;
-    }
-    
-    .social-links {
-      display: flex;
-      gap: clamp(0.8rem, 2vw, 1rem);
-      justify-content: center;
-      margin-top: clamp(1.5rem, 3vw, 2rem);
-      flex-wrap: wrap;
-    }
-    
-    .social-links a {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: clamp(36px, 8vw, 40px);
-      height: clamp(36px, 8vw, 40px);
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 50%;
-      color: white;
-      transition: all 0.3s ease;
-      text-decoration: none;
-      min-height: 44px; /* Touch target */
-      min-width: 44px;
-    }
-    
-    .social-links a:hover {
-      background: white;
-      color: var(--primary);
-      transform: translateY(-3px);
-    }
-    
-    .copyright {
-      margin-top: clamp(2rem, 5vw, 3rem);
-      padding-top: clamp(1.5rem, 3vw, 2rem);
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      font-size: clamp(0.85rem, 2vw, 1rem);
-    }
-    
-    /* Mode Toggle */
     .mode-toggle {
       position: fixed;
       top: clamp(20px, 5vw, 28px);
@@ -951,280 +363,857 @@
       background: rgba(255, 255, 255, 0.15);
       backdrop-filter: blur(5px);
       -webkit-backdrop-filter: blur(5px);
-      min-height: 44px; /* Touch target */
+      min-height: 44px;
       min-width: 44px;
     }
     
-    .mode-toggle:focus,
-    .mode-toggle:hover {
-      opacity: 0.85;
-      color: var(--primary);
-      background: rgba(255, 255, 255, 0.25);
-      transform: scale(1.15);
-      outline: none;
+    .scroll-indicator {
+      position: absolute;
+      bottom: clamp(20px, 5vw, 30px);
+      left: 50%;
+      transform: translateX(-50%);
+      animation: float 2.5s ease-in-out infinite;
+      z-index: 3;
     }
     
-    .mode-toggle i {
-      pointer-events: none;
-      transition: color 0.3s;
+    .scroll-indicator i {
+      font-size: clamp(1.2rem, 4vw, 1.8rem);
+      color: white;
     }
     
-    /* Special section backgrounds */
-    .section-alt-bg {
-      background: rgba(100, 182, 172, 0.05);
+    /* Desktop/Mobile responsive critical styles */
+    @media (min-width: 769px) {
+      .desktop-logo {
+        display: block;
+      }
+      
+      .hero-logo {
+        display: none;
+      }
     }
+    
+    @media (max-width: 768px) {
+      .top-menu-wrapper {
+        display: none;
+      }
 
-/* Desktop version - show logo NEXT to menu */
-@media (min-width: 769px) {
-  .desktop-logo {
-    display: block; /* Show desktop logo */
-  }
-  
-  .hero-logo {
-    display: none; /* Hide hero logo on desktop */
-  }
-}
-
-/* Enhanced Mobile Responsive Styles */
-@media (max-width: 1024px) {
-  .hero-model {
-    width: clamp(350px, 70vw, 800px);
-    height: clamp(350px, 70vw, 800px);
-    left: -5%;
-  }
-  
-  .hero-content {
-    padding-left: clamp(2rem, 8vw, 4rem);
-  }
-  
-  .hero-logo {
-    top: clamp(15px, 3vw, 30px);
-    left: clamp(15px, 3vw, 30px);
-  }
-  
-  .hero-logo img {
-    height: clamp(35px, 6vw, 60px);
-  }
-}
-
-@media (max-width: 768px) {
-  /* Hide top menu on mobile */
-  .top-menu-wrapper {
-    display: none;
-  }
-
-  .desktop-logo {
-    display: none; /* Hide desktop logo on mobile */
-  }
-  
-  .hero-logo {
-    display: block; /* Keep original logo visible on mobile */
-  }
-
-  /* Hero Section Mobile Optimizations */
-  .hero {
-    padding: 3rem 1.5rem 2rem;
-    min-height: 100vh;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  
-  .hero-logo {
-    top: clamp(15px, 3vw, 25px);
-    left: clamp(15px, 3vw, 25px);
-  }
-  
-  .hero-logo img {
-    height: clamp(65px, 11vw, 85px); /* Increased from clamp(40px, 7vw, 55px) */
-  }
-  
-  .hero-model {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: min(700px, 140vw); /* Significantly increased from 500px/100vw */
-    height: min(700px, 140vw); /* Significantly increased from 500px/100vw */
-    margin: 0;
-    order: 0;
-    z-index: 1;
-    opacity: 0.9;
-  }
-  
-  .hero-content {
-    position: relative;
-    z-index: 2;
-    padding-left: 0;
-    order: 1;
-    width: 100%;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-  }
-  
-  .hero h1 {
-    font-size: clamp(1.8rem, 6vw, 2.8rem);
-    line-height: 1.2;
-    margin-bottom: 1rem;
-  }
-  
-  .hero p {
-    font-size: clamp(1rem, 2.8vw, 1.2rem);
-    margin-bottom: 2rem;
-  }
-  
-  .hero-buttons {
-    flex-direction: column;
-    gap: 1rem;
-    width: 100%;
-    max-width: 300px;
-    margin: 0 auto;
-  }
-  
-  /* Grid and Layout Adjustments */
-  .feature-grid,
-  .activity-showcase {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-  
-  .stats-dashboard {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-  }
-  
-  .steps-container {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-  
-  /* Form Enhancements */
-  .contact-form {
-    gap: 1rem;
-  }
-  
-  .form-input,
-  .form-select {
-    padding: 1rem;
-    font-size: 1rem;
-    border-radius: 8px;
-  }
-  
-  /* Footer Mobile */
-  .footer-content {
-    grid-template-columns: repeat(2, 1fr);
-    text-align: center;
-    justify-items: center;
-  }
-  
-  /* Testimonial Mobile */
-  .testimonial-carousel {
-    padding: 1.5rem 0.5rem 3rem;
-  }
-  
-  .testimonial {
-    padding: 1.5rem 1rem;
-  }
-  
-  /* Button Spacing */
-  .btn {
-    padding: 1rem 1.5rem;
-    font-size: 0.95rem;
-    min-height: 44px;
-  }
-  
-  /* Card Spacing */
-  .card {
-    padding: 1.5rem;
-    border-radius: 12px;
-  }
-  
-  .card-icon {
-    width: 50px;
-    height: 50px;
-    font-size: 1.3rem;
-    margin-bottom: 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-      /* Make the 'Find Your Dog's Next Adventure' CTA button white on mobile */
+      .desktop-logo {
+        display: none;
+      }
+      
+      .hero-logo {
+        display: block;
+      }
+      
       .btn-outline {
         background: #fff !important;
         color: var(--primary) !important;
         border: 2px solid #fff !important;
       }
-  /* Extra Small Mobile Devices */
-  .scroll-section {
-    padding: 2.5rem 1rem;
-  }
-  
-  .hero {
-    padding: 2.5rem 1rem 2rem;
-  }
-  
-  .hero-logo {
-    top: clamp(10px, 2vw, 20px);
-    left: clamp(10px, 2vw, 20px);
-  }
-  
-  .hero-logo img {
-    height: clamp(60px, 9vw, 80px); /* Increased from clamp(25px, 4vw, 35px) for bigger mobile logo */
-  }
-  
-  .hero-model {
-    width: min(1200px, 240vw); /* Even bigger - increased from 1000px/198vw */
-    height: min(1200px, 240vw); /* Even bigger - increased from 1000px/198vw */
-    margin-bottom: 1.5rem;
-  }
-  
-  .hero h1 {
-    font-size: clamp(1.5rem, 5vw, 2.2rem);
-  }
-  
-  .hero p {
-    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
-  }
-  
-  .hero-buttons {
-    max-width: 280px;
-  }
-  
-  .stats-dashboard {
-    grid-template-columns: 1fr;
-  }
-  
-  .footer-content {
-    grid-template-columns: 1fr;
-  }
-  
-  .top-menu-wrapper {
-    width: 98vw;
-    min-width: 260px;
-  }
-  
-  .top-menu-item {
-    font-size: 0.65rem;
-    padding: 0.2rem 0.6rem;
-  }
-  
-  .section-heading h2 {
-    font-size: clamp(1.6rem, 5vw, 2.2rem);
-  }
-  
-  .testimonial {
-    padding: 1.2rem 0.8rem;
-  }
-  
-  .activity-item {
-    height: 220px;
-  }
-  
-  .card {
-    padding: 1.2rem;
-  }
-}
+    }
   </style>
+  
+  <!-- PERFORMANCE OPTIMIZATION: Load non-critical CSS asynchronously -->
+  <script>
+    // Load non-critical CSS after critical rendering
+    function loadNonCriticalCSS() {
+      const nonCriticalStyles = `
+        /* All remaining non-critical CSS */
+        body.dark-mode {
+          background-image: radial-gradient(circle at 10% 20%, rgba(58, 140, 174, 0.05) 0%, transparent 20%),
+                            radial-gradient(circle at 90% 80%, rgba(249, 181, 114, 0.05) 0%, transparent 20%);
+        }
+        
+        /* Additional animations */
+        @keyframes scaleIn {
+          from { transform: scale(0.8); opacity: 0; }
+          to { transform: scale(1); opacity: 1; }
+        }
+        
+        @keyframes pulse {
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.05); }
+        }
+        
+        @keyframes borderGlow {
+          0%, 100% { box-shadow: 0 0 0 0 rgba(100, 182, 172, 0.3); }
+          50% { box-shadow: 0 0 15px 5px rgba(100, 182, 172, 0.3); }
+        }
+        
+        @keyframes slideInLeft {
+          from { transform: translateX(-50px); opacity: 0; }
+          to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes slideInRight {
+          from { transform: translateX(50px); opacity: 0; }
+          to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes ripple {
+          0% { transform: scale(0); opacity: 1; }
+          100% { transform: scale(4); opacity: 0; }
+        }
+        
+        @keyframes bounce {
+          0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+          40% {transform: translateY(-20px);}
+          60% {transform: translateY(-10px);}
+        }
+        
+        /* Smooth Scrolling Sections */
+        .scroll-section {
+          min-height: 100vh;
+          padding: clamp(3rem, 8vw, 6rem) clamp(1rem, 4vw, 2rem);
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          position: relative;
+          overflow: hidden;
+        }
+        
+        .hero::before {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: 10px;
+          background: linear-gradient(90deg, var(--primary), var(--secondary), var(--primary));
+          animation: borderGlow 4s infinite;
+        }
+        
+        /* Interactive Cards */
+        .card {
+          background: var(--card-bg);
+          border-radius: clamp(12px, 3vw, 18px);
+          padding: clamp(1.5rem, 5vw, 2.5rem);
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+          transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+          position: relative;
+          overflow: hidden;
+          border: 1px solid rgba(255, 255, 255, 0.3);
+          transform: translateY(30px);
+          opacity: 0;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+        }
+        
+        .card.active {
+          transform: translateY(0);
+          opacity: 1;
+        }
+        
+        .card::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 5px;
+          background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+        
+        .card:hover {
+          transform: translateY(-10px);
+          box-shadow: 0 15px 40px rgba(100, 182, 172, 0.2);
+        }
+        
+        .card-icon {
+          width: clamp(50px, 12vw, 70px);
+          height: clamp(50px, 12vw, 70px);
+          background: rgba(100, 182, 172, 0.1);
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: clamp(1rem, 3vw, 1.5rem);
+          font-size: clamp(1.2rem, 4vw, 1.8rem);
+          color: var(--primary);
+          transition: all 0.3s ease;
+        }
+        
+        .card:hover .card-icon {
+          background: rgba(100, 182, 172, 0.2);
+          transform: scale(1.1) rotate(5deg);
+        }
+        
+        /* Feature Grid */
+        .feature-grid {
+          display: grid;
+          gap: clamp(1rem, 4vw, 2rem);
+          grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+          width: 100%;
+          max-width: 1200px;
+          margin: 0 auto;
+        }
+        
+        .feature-card {
+          display: flex;
+        }
+        
+        .order-0 {
+          transition-delay: 0s;
+        }
+        .order-1 {
+          transition-delay: 0.1s;
+        }
+        .order-2 {
+          transition-delay: 0.2s;
+        }
+        
+        /* Stats Dashboard */
+        .stats-dashboard {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+          gap: clamp(1rem, 3vw, 1.5rem);
+          margin: clamp(2rem, 5vw, 3rem) auto;
+          max-width: 1000px;
+        }
+        
+        .stat-card {
+          background: var(--card-bg);
+          padding: clamp(1rem, 3vw, 1.5rem);
+          border-radius: clamp(8px, 2vw, 12px);
+          text-align: center;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+          transition: all 0.3s ease;
+        }
+        
+        .stat-value {
+          font-size: clamp(1.8rem, 6vw, 2.5rem);
+          font-weight: 700;
+          color: var(--primary);
+          margin-bottom: clamp(0.3rem, 1vw, 0.5rem);
+        }
+        
+        /* How It Works Steps */
+        .steps-container {
+          max-width: 1000px;
+          margin: 0 auto;
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+          gap: clamp(2rem, 5vw, 3rem);
+        }
+        
+        .step-card {
+          text-align: center;
+          position: relative;
+        }
+        
+        .step-number {
+          width: clamp(60px, 15vw, 80px);
+          height: clamp(60px, 15vw, 80px);
+          background: var(--primary);
+          color: white;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: clamp(1.5rem, 4vw, 2rem);
+          font-weight: 700;
+          margin: 0 auto clamp(1.5rem, 3vw, 2rem);
+          box-shadow: 0 10px 30px rgba(100, 182, 172, 0.3);
+        }
+        
+        .step-card h3 {
+          font-size: clamp(1.2rem, 3vw, 1.5rem);
+          margin-bottom: clamp(0.8rem, 2vw, 1rem);
+          color: var(--dark-brown);
+        }
+        
+        /* Activity Showcase */
+        .activity-showcase {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+          gap: clamp(1.5rem, 4vw, 2rem);
+          margin: clamp(2rem, 5vw, 3rem) auto;
+          max-width: 1100px;
+        }
+        
+        .activity-item {
+          border-radius: clamp(8px, 2vw, 12px);
+          overflow: hidden;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          transition: all 0.4s ease;
+          transform: scale(0.95);
+          opacity: 0;
+          height: clamp(250px, 50vw, 300px);
+          position: relative;
+          cursor: pointer;
+          background: var(--card-bg);
+        }
+        
+        .activity-item.active {
+          transform: scale(1);
+          opacity: 1;
+        }
+        
+        .activity-item:hover {
+          transform: scale(1.05);
+          box-shadow: 0 15px 40px rgba(100, 182, 172, 0.2);
+        }
+        
+        .activity-icon {
+          font-size: clamp(2rem, 6vw, 3rem);
+          color: var(--primary);
+          margin: clamp(1.5rem, 4vw, 2rem) auto clamp(0.8rem, 2vw, 1rem);
+          display: block;
+          text-align: center;
+        }
+        
+        .activity-content {
+          padding: clamp(1rem, 3vw, 1.5rem);
+          text-align: center;
+        }
+        
+        .activity-content h4 {
+          font-size: clamp(1.1rem, 2.8vw, 1.3rem);
+          margin-bottom: clamp(0.3rem, 1vw, 0.5rem);
+          color: var(--dark-brown);
+        }
+        
+        /* Testimonials */
+        .testimonial-carousel {
+          max-width: min(900px, 95vw);
+          margin: clamp(2rem, 5vw, 3rem) auto;
+          position: relative;
+          overflow: visible;
+          padding: clamp(1.5rem, 4vw, 2rem) clamp(0.5rem, 2vw, 1rem) clamp(2.5rem, 6vw, 3.5rem);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          min-height: clamp(280px, 60vw, 340px);
+        }
+
+        .testimonial {
+          background: var(--card-bg);
+          padding: clamp(1.5rem, 4vw, 2.2rem) clamp(1.2rem, 3vw, 2rem) clamp(1.2rem, 3vw, 2rem);
+          border-radius: clamp(16px, 4vw, 24px);
+          box-shadow: 0 8px 32px rgba(100, 182, 172, 0.10);
+          text-align: center;
+          opacity: 0;
+          transition: opacity 0.5s, transform 0.5s;
+          transform: scale(0.97) translateY(30px);
+          position: absolute;
+          left: 0;
+          right: 0;
+          margin: 0 auto;
+          width: 100%;
+          max-width: min(700px, 95vw);
+          pointer-events: none;
+          z-index: 0;
+          display: block;
+        }
+
+        .testimonial.active {
+          opacity: 1;
+          transform: scale(1) translateY(0);
+          z-index: 2;
+          pointer-events: auto;
+          position: relative;
+        }
+
+        .testimonial-quote {
+          font-size: clamp(1rem, 2.5vw, 1.15rem);
+          font-style: italic;
+          margin-bottom: clamp(1rem, 2.5vw, 1.2rem);
+          line-height: 1.7;
+          max-width: min(600px, 95vw);
+          margin-left: auto;
+          margin-right: auto;
+          color: var(--text);
+        }
+
+        .testimonial-author {
+          font-weight: 600;
+          color: var(--primary);
+          font-size: clamp(0.9rem, 2.2vw, 1.05rem);
+          margin-top: clamp(0.8rem, 2vw, 1rem);
+        }
+
+        .carousel-arrows {
+          position: absolute;
+          bottom: clamp(0.3rem, 1vw, 0.5rem);
+          left: 0;
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          z-index: 10;
+          pointer-events: none;
+          padding: 0 clamp(1rem, 3vw, 1.5rem);
+        }
+
+        .carousel-arrow {
+          pointer-events: auto;
+          background: var(--primary);
+          color: #fff;
+          border: none;
+          border-radius: 50%;
+          width: clamp(40px, 10vw, 44px);
+          height: clamp(40px, 10vw, 44px);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: clamp(1.1rem, 3vw, 1.3rem);
+          box-shadow: 0 2px 8px rgba(100, 182, 172, 0.15);
+          transition: background 0.2s, color 0.2s, transform 0.2s;
+          cursor: pointer;
+          outline: none;
+          min-height: 44px;
+          min-width: 44px;
+        }
+        
+        .carousel-arrow:focus,
+        .carousel-arrow:hover {
+          background: var(--primary-dark);
+          color: #fff;
+          transform: scale(1.08);
+        }
+        
+        /* Button styles */
+        .btn:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 8px 25px rgba(100, 182, 172, 0.4);
+        }
+        
+        .btn-cta-orange:hover {
+          background: #d95c3c;
+          border-color: #d95c3c;
+          color: #fff;
+        }
+        
+        .btn-secondary {
+          background: white;
+          color: var(--primary);
+          border: 1px solid var(--primary);
+        }
+        
+        .btn-outline:hover {
+          background: white;
+          color: var(--primary);
+        }
+        
+        .btn-full-width {
+          width: 100%;
+        }
+        
+        .ripple {
+          position: absolute;
+          background: rgba(255, 255, 255, 0.4);
+          border-radius: 50%;
+          transform: scale(0);
+          animation: ripple 0.6s linear;
+          pointer-events: none;
+        }
+        
+        /* Section Headings */
+        .section-heading {
+          text-align: center;
+          margin-bottom: clamp(2.5rem, 6vw, 4rem);
+          position: relative;
+        }
+        
+        .section-heading h2 {
+          font-size: clamp(2rem, 6vw, 2.8rem);
+          color: var(--dark-brown);
+          margin-bottom: clamp(0.8rem, 2vw, 1rem);
+          display: inline-block;
+          position: relative;
+          font-weight: 700;
+        }
+        
+        .section-heading h2::after {
+          content: "";
+          position: absolute;
+          bottom: -10px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: clamp(60px, 15vw, 80px);
+          height: 4px;
+          background: var(--primary);
+          border-radius: 2px;
+        }
+        
+        .section-heading p {
+          max-width: min(700px, 90vw);
+          margin: 0 auto;
+          font-size: clamp(1rem, 2.5vw, 1.1rem);
+          color: var(--text);
+          opacity: 0.8;
+        }
+        
+        /* Contact Section Styles */
+        .contact-card {
+          max-width: min(600px, 95vw);
+          margin: 0 auto;
+        }
+        
+        .contact-card h3 {
+          text-align: center;
+        }
+        
+        .contact-card p {
+          text-align: center;
+          margin-bottom: clamp(1.5rem, 4vw, 2rem);
+        }
+        
+        .contact-form {
+          display: grid;
+          gap: clamp(0.8rem, 2vw, 1rem);
+        }
+        
+        .form-input,
+        .form-select {
+          padding: clamp(0.8rem, 2.5vw, 1rem);
+          border-radius: clamp(6px, 1.5vw, 8px);
+          border: 1px solid #ddd;
+          background: var(--white);
+          color: var(--text);
+          font-size: clamp(0.9rem, 2.2vw, 1rem);
+          min-height: 44px;
+          width: 100%;
+        }
+        
+        .form-feedback {
+          text-align: center;
+          padding: clamp(0.8rem, 2vw, 1rem);
+          opacity: 0;
+          transition: opacity 0.3s ease;
+        }
+        
+        .form-feedback.visible {
+          opacity: 1;
+        }
+        
+        /* Footer */
+        footer {
+          background: var(--primary);
+          color: white;
+          padding: clamp(2.5rem, 6vw, 4rem) clamp(1rem, 4vw, 2rem);
+          text-align: center;
+          position: relative;
+        }
+        
+        footer::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 10px;
+          background: linear-gradient(90deg, var(--primary), var(--secondary), var(--primary));
+        }
+        
+        .footer-content {
+          max-width: 1200px;
+          margin: 0 auto;
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+          gap: clamp(1.5rem, 4vw, 2rem);
+          text-align: left;
+          align-items: start;
+          justify-items: start;
+        }
+        
+        .footer-column h3 {
+          color: white;
+          margin-bottom: clamp(1rem, 3vw, 1.5rem);
+          font-size: clamp(1.1rem, 2.8vw, 1.3rem);
+        }
+        
+        .footer-column ul {
+          list-style: none;
+        }
+        
+        .footer-column ul li {
+          margin-bottom: clamp(0.6rem, 1.5vw, 0.8rem);
+        }
+        
+        .footer-column ul li a {
+          color: rgba(255, 255, 255, 0.8);
+          text-decoration: none;
+          transition: all 0.3s ease;
+          font-size: clamp(0.9rem, 2.2vw, 1rem);
+        }
+        
+        .footer-column ul li a:hover {
+          color: white;
+          padding-left: 5px;
+        }
+        
+        .social-links {
+          display: flex;
+          gap: clamp(0.8rem, 2vw, 1rem);
+          justify-content: center;
+          margin-top: clamp(1.5rem, 3vw, 2rem);
+          flex-wrap: wrap;
+        }
+        
+        .social-links a {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: clamp(36px, 8vw, 40px);
+          height: clamp(36px, 8vw, 40px);
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 50%;
+          color: white;
+          transition: all 0.3s ease;
+          text-decoration: none;
+          min-height: 44px;
+          min-width: 44px;
+        }
+        
+        .social-links a:hover {
+          background: white;
+          color: var(--primary);
+          transform: translateY(-3px);
+        }
+        
+        .copyright {
+          margin-top: clamp(2rem, 5vw, 3rem);
+          padding-top: clamp(1.5rem, 3vw, 2rem);
+          border-top: 1px solid rgba(255, 255, 255, 0.1);
+          font-size: clamp(0.85rem, 2vw, 1rem);
+        }
+        
+        .mode-toggle:focus,
+        .mode-toggle:hover {
+          opacity: 0.85;
+          color: var(--primary);
+          background: rgba(255, 255, 255, 0.25);
+          transform: scale(1.15);
+          outline: none;
+        }
+        
+        .mode-toggle i {
+          pointer-events: none;
+          transition: color 0.3s;
+        }
+        
+        /* Special section backgrounds */
+        .section-alt-bg {
+          background: rgba(100, 182, 172, 0.05);
+        }
+        
+        /* Enhanced Mobile Responsive Styles */
+        @media (max-width: 1024px) {
+          .hero-model {
+            width: clamp(350px, 70vw, 800px);
+            height: clamp(350px, 70vw, 800px);
+            left: -5%;
+          }
+          
+          .hero-content {
+            padding-left: clamp(2rem, 8vw, 4rem);
+          }
+          
+          .hero-logo {
+            top: clamp(15px, 3vw, 30px);
+            left: clamp(15px, 3vw, 30px);
+          }
+          
+          .hero-logo img {
+            height: clamp(35px, 6vw, 60px);
+          }
+        }
+
+        @media (max-width: 768px) {
+          .hero {
+            padding: 3rem 1.5rem 2rem;
+            min-height: 100vh;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+          }
+          
+          .hero-logo {
+            top: clamp(15px, 3vw, 25px);
+            left: clamp(15px, 3vw, 25px);
+          }
+          
+          .hero-logo img {
+            height: clamp(65px, 11vw, 85px);
+          }
+          
+          .hero-model {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: min(700px, 140vw);
+            height: min(700px, 140vw);
+            margin: 0;
+            order: 0;
+            z-index: 1;
+            opacity: 0.9;
+          }
+          
+          .hero-content {
+            position: relative;
+            z-index: 2;
+            padding-left: 0;
+            order: 1;
+            width: 100%;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+          }
+          
+          .hero h1 {
+            font-size: clamp(1.8rem, 6vw, 2.8rem);
+            line-height: 1.2;
+            margin-bottom: 1rem;
+          }
+          
+          .hero p {
+            font-size: clamp(1rem, 2.8vw, 1.2rem);
+            margin-bottom: 2rem;
+          }
+          
+          .hero-buttons {
+            flex-direction: column;
+            gap: 1rem;
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+          }
+          
+          .feature-grid,
+          .activity-showcase {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+          }
+          
+          .stats-dashboard {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+          }
+          
+          .steps-container {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+          }
+          
+          .contact-form {
+            gap: 1rem;
+          }
+          
+          .form-input,
+          .form-select {
+            padding: 1rem;
+            font-size: 1rem;
+            border-radius: 8px;
+          }
+          
+          .footer-content {
+            grid-template-columns: repeat(2, 1fr);
+            text-align: center;
+            justify-items: center;
+          }
+          
+          .testimonial-carousel {
+            padding: 1.5rem 0.5rem 3rem;
+          }
+          
+          .testimonial {
+            padding: 1.5rem 1rem;
+          }
+          
+          .btn {
+            padding: 1rem 1.5rem;
+            font-size: 0.95rem;
+            min-height: 44px;
+          }
+          
+          .card {
+            padding: 1.5rem;
+            border-radius: 12px;
+          }
+          
+          .card-icon {
+            width: 50px;
+            height: 50px;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .scroll-section {
+            padding: 2.5rem 1rem;
+          }
+          
+          .hero {
+            padding: 2.5rem 1rem 2rem;
+          }
+          
+          .hero-logo {
+            top: clamp(10px, 2vw, 20px);
+            left: clamp(10px, 2vw, 20px);
+          }
+          
+          .hero-logo img {
+            height: clamp(60px, 9vw, 80px);
+          }
+          
+          .hero-model {
+            width: min(1200px, 240vw);
+            height: min(1200px, 240vw);
+            margin-bottom: 1.5rem;
+          }
+          
+          .hero h1 {
+            font-size: clamp(1.5rem, 5vw, 2.2rem);
+          }
+          
+          .hero p {
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+          }
+          
+          .hero-buttons {
+            max-width: 280px;
+          }
+          
+          .stats-dashboard {
+            grid-template-columns: 1fr;
+          }
+          
+          .footer-content {
+            grid-template-columns: 1fr;
+          }
+          
+          .section-heading h2 {
+            font-size: clamp(1.6rem, 5vw, 2.2rem);
+          }
+          
+          .testimonial {
+            padding: 1.2rem 0.8rem;
+          }
+          
+          .activity-item {
+            height: 220px;
+          }
+          
+          .card {
+            padding: 1.2rem;
+          }
+        }
+      `;
+      
+      const style = document.createElement('style');
+      style.textContent = nonCriticalStyles;
+      document.head.appendChild(style);
+    }
+    
+    // Load non-critical CSS after page load
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', loadNonCriticalCSS);
+    } else {
+      loadNonCriticalCSS();
+    }
+  </script>
 </head>
 <body>
   <!-- Mode Toggle -->
@@ -1276,212 +1265,6 @@
       <i class="fas fa-chevron-down"></i>
     </div>
   </section>
-
-<!-- Three.js Model Hover Script -->
-<script>
-  // Enhanced Three.js Scene Setup for smartwatch-style model
-  let scene, camera, renderer, model;
-  let animationId;
-  let composer, renderPass, bloomPass;
-
-  function initThreeJS() {
-    const canvas = document.getElementById('three-canvas');
-    const container = canvas.parentElement;
-
-    // Scene setup
-    scene = new THREE.Scene();
-    scene.background = null; // Keep transparent
-
-    // Camera setup - positioned to showcase watch vertically     ||      ROTATION / POSITION CONTROL
-    camera = new THREE.PerspectiveCamera(35, container.clientWidth / container.clientHeight, 0.1, 500);
-    const radius = 8;
-    camera.position.x = radius * 1.2;
-    camera.position.y = radius * 0.9;
-    camera.position.z = radius * -0.7;
-    camera.lookAt(0, 0, 0);
-    camera.up.set(0, 1, 1);
-
-    // Renderer setup with enhanced settings for brightness
-    renderer = new THREE.WebGLRenderer({
-      canvas: canvas,
-      alpha: true,
-      antialias: true,
-      powerPreference: "high-performance"
-    });
-    renderer.setSize(container.clientWidth, container.clientHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.setClearColor(0x000000, 0);
-    // Disable shadows for brighter, fun appearance
-    renderer.shadowMap.enabled = false;
-    renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 2.5; // Much brighter exposure
-
-    // Bright and fun lighting setup
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.8); // Much brighter ambient
-    scene.add(ambientLight);
-
-    // Main bright key light
-    const keyLight = new THREE.DirectionalLight(0xffffff, 2.5);
-    keyLight.position.set(5, 8, 3);
-    keyLight.castShadow = false; // Disable shadows
-    scene.add(keyLight);
-
-    // Bright fill light with slight blue tint for fun
-    const fillLight = new THREE.DirectionalLight(0xaaccff, 1.8);
-    fillLight.position.set(-3, 2, 2);
-    scene.add(fillLight);
-
-    // Fun colorful rim light with pink/purple tint
-    const rimLight = new THREE.DirectionalLight(0xffaacc, 1.5);
-    rimLight.position.set(-2, 1, -3);
-    scene.add(rimLight);
-
-    // Bright hemisphere lighting for overall illumination
-    const hemiLight = new THREE.HemisphereLight(0xffffff, 0xccccff, 1.2);
-    scene.add(hemiLight);
-
-    // Add some fun colored accent lights
-    const accentLight1 = new THREE.PointLight(0x00ffff, 1.0, 20);
-    accentLight1.position.set(4, 4, 4);
-    scene.add(accentLight1);
-
-    const accentLight2 = new THREE.PointLight(0xff6600, 0.8, 20);
-    accentLight2.position.set(-4, -2, 4);
-    scene.add(accentLight2);
-
-    const accentLight3 = new THREE.PointLight(0xff0099, 0.9, 20);
-    accentLight3.position.set(0, 6, -4);
-    scene.add(accentLight3);
-
-    // Load the model
-    loadModel();
-
-    // Start animation loop
-    animate();
-
-    // Handle window resize
-    window.addEventListener('resize', onWindowResize);
-  }
-
-  function loadModel() {
-    const loader = new THREE.GLTFLoader();
-    loader.load(
-      'reference/models/wagglo_3D.glb',
-      function(gltf) {
-        model = gltf.scene;
-        
-        // Center and scale the model
-        const box = new THREE.Box3().setFromObject(model);
-        const center = box.getCenter(new THREE.Vector3());
-        const size = box.getSize(new THREE.Vector3());
-        
-        model.position.x = -center.x - 4.5; // Move model more to the left
-        model.position.y = -center.y - 5.0; // Move model down on the page
-        model.position.z = -center.z + 2.0;
-        
-        // Scale to make it prominent like in reference image
-        const maxDim = Math.max(size.x, size.y, size.z);
-        const scale = 7.5 / maxDim; // Much bigger scale     ||      SCALE CONTROL
-        model.scale.setScalar(scale);
-
-        // Rotate model to vertical orientation
-        model.rotation.x = -Math.PI / 2 + 0.28; // Slightly less than vertical for a more horizontal look
-        model.rotation.z = 0; // Ensure no twist
-
-        // Enhance materials for bright, fun appearance
-        model.traverse((child) => {
-          if (child.isMesh) {
-            child.castShadow = false; // Disable shadow casting
-            child.receiveShadow = false; // Disable shadow receiving
-            
-            // Enhance material properties for bright, fun appearance
-            if (child.material) {
-              if (child.material.name && child.material.name.toLowerCase().includes('black')) {
-                // Make black parts less dark and more reflective
-                child.material.metalness = 0.6;
-                child.material.roughness = 0.1;
-                child.material.envMapIntensity = 1.5;
-                // Add slight brightness to black parts
-                child.material.emissive = new THREE.Color(0x111122);
-              } else if (child.material.name && child.material.name.toLowerCase().includes('screen')) {
-                // Screen material - bright glow
-                child.material.emissive = new THREE.Color(0x003366);
-                child.material.metalness = 0.1;
-                child.material.roughness = 0.05;
-              } else {
-                // General enhancement for brightness
-                child.material.metalness = Math.min(child.material.metalness + 0.3, 1.0);
-                child.material.roughness = Math.max(child.material.roughness - 0.2, 0.0);
-                // Add subtle emissive glow to all materials
-                child.material.emissive = new THREE.Color(0x050505);
-              }
-            }
-          }
-        });
-
-        scene.add(model);
-        
-        // Show the canvas with fade-in effect
-        const canvas = document.getElementById('three-canvas');
-        canvas.classList.add('loaded');
-        canvas.style.opacity = '0';
-        canvas.style.transition = 'opacity 0.5s ease-in-out';
-        setTimeout(() => {
-          canvas.style.opacity = '1';
-        }, 100);
-      },
-      undefined,
-      function(error) {
-        console.error('Error loading model:', error);
-        const canvas = document.getElementById('three-canvas');
-        canvas.style.display = 'none';
-      }
-    );
-  }
-
-  function animate() {
-    animationId = requestAnimationFrame(animate);
-    
-    if (model) {
-      const time = Date.now() * 0.001;
-      
-      // More lively floating motion for fun effect
-      model.position.y = -3.0 + Math.sin(time * 0.8) * 0.15; // Maintain lower position during animation
-      
-      // More dynamic rotation for playful movement
-      const baseRotationY = Math.sin(time * 0.4) * 0.2;
-      model.rotation.y = baseRotationY;
-      
-      // Keep the slightly more horizontal orientation with animated tilt     ||      ROTATION CONTROL
-      model.rotation.x = -Math.PI / 2 + 1 + Math.sin(time * 0.6) * 0.05;
-    }
-    
-    renderer.render(scene, camera);
-  }
-
-  function onWindowResize() {
-    const canvas = document.getElementById('three-canvas');
-    const container = canvas.parentElement;
-    camera.aspect = container.clientWidth / container.clientHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(container.clientWidth, container.clientHeight);
-  }
-
-  // Initialize Three.js when page loads
-  window.addEventListener('DOMContentLoaded', () => {
-    initThreeJS();
-  });
-
-  // Cleanup on page unload
-  window.addEventListener('beforeunload', () => {
-    if (animationId) {
-      cancelAnimationFrame(animationId);
-    }
-    if (renderer) {
-      renderer.dispose();
-    }
-  });
-</script>
 
   <!-- Mission Section -->
   <section id="mission" class="scroll-section">
@@ -1773,6 +1556,283 @@
       <p>&copy; 2025 Wagglo. All rights reserved. Made with ❤️ for dogs everywhere.</p>
     </div>
   </footer>
+
+  <!-- PERFORMANCE OPTIMIZATION: Conditionally load Three.js and Chart.js only when needed -->
+  <script>
+    // Global flags to prevent multiple loads
+    let threeJSLoaded = false;
+    let chartJSLoaded = false;
+    
+    // Function to dynamically load Three.js
+    function loadThreeJS() {
+      if (threeJSLoaded) return Promise.resolve();
+      threeJSLoaded = true;
+      
+      return new Promise((resolve, reject) => {
+        const script1 = document.createElement('script');
+        script1.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+        script1.onload = () => {
+          const script2 = document.createElement('script');
+          script2.src = 'https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js';
+          script2.onload = () => {
+            initThreeJS();
+            resolve();
+          };
+          script2.onerror = reject;
+          document.head.appendChild(script2);
+        };
+        script1.onerror = reject;
+        document.head.appendChild(script1);
+      });
+    }
+    
+    // Function to dynamically load Chart.js
+    function loadChartJS() {
+      if (chartJSLoaded) return Promise.resolve();
+      chartJSLoaded = true;
+      
+      return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/chart.js';
+        script.onload = resolve;
+        script.onerror = reject;
+        document.head.appendChild(script);
+      });
+    }
+    
+    // PERFORMANCE OPTIMIZATION: Load scripts on user interaction or after delay
+    let userInteracted = false;
+    
+    function handleFirstInteraction() {
+      if (userInteracted) return;
+      userInteracted = true;
+      
+      // Load Three.js immediately on first interaction
+      loadThreeJS().catch(console.error);
+      
+      // Load Chart.js as well (if needed for future features)
+      loadChartJS().catch(console.error);
+      
+      // Remove listeners after first interaction
+      ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach(event => {
+        document.removeEventListener(event, handleFirstInteraction, true);
+      });
+    }
+    
+    // Add interaction listeners
+    ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach(event => {
+      document.addEventListener(event, handleFirstInteraction, { passive: true, once: true });
+    });
+    
+    // Fallback: load after 3 seconds if no interaction
+    setTimeout(() => {
+      if (!userInteracted) {
+        handleFirstInteraction();
+      }
+    }, 3000);
+  </script>
+
+  <!-- Three.js Model Script - Only runs after library is loaded -->
+  <script>
+    // Enhanced Three.js Scene Setup for smartwatch-style model
+    let scene, camera, renderer, model;
+    let animationId;
+
+    function initThreeJS() {
+      const canvas = document.getElementById('three-canvas');
+      if (!canvas) return;
+      
+      const container = canvas.parentElement;
+
+      // Scene setup
+      scene = new THREE.Scene();
+      scene.background = null; // Keep transparent
+
+      // Camera setup - positioned to showcase watch vertically
+      camera = new THREE.PerspectiveCamera(35, container.clientWidth / container.clientHeight, 0.1, 500);
+      const radius = 8;
+      camera.position.x = radius * 1.2;
+      camera.position.y = radius * 0.9;
+      camera.position.z = radius * -0.7;
+      camera.lookAt(0, 0, 0);
+      camera.up.set(0, 1, 1);
+
+      // Renderer setup with enhanced settings for brightness
+      renderer = new THREE.WebGLRenderer({
+        canvas: canvas,
+        alpha: true,
+        antialias: true,
+        powerPreference: "high-performance"
+      });
+      renderer.setSize(container.clientWidth, container.clientHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setClearColor(0x000000, 0);
+      // Disable shadows for brighter, fun appearance
+      renderer.shadowMap.enabled = false;
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 2.5; // Much brighter exposure
+
+      // Bright and fun lighting setup
+      const ambientLight = new THREE.AmbientLight(0xffffff, 1.8);
+      scene.add(ambientLight);
+
+      // Main bright key light
+      const keyLight = new THREE.DirectionalLight(0xffffff, 2.5);
+      keyLight.position.set(5, 8, 3);
+      keyLight.castShadow = false;
+      scene.add(keyLight);
+
+      // Bright fill light with slight blue tint for fun
+      const fillLight = new THREE.DirectionalLight(0xaaccff, 1.8);
+      fillLight.position.set(-3, 2, 2);
+      scene.add(fillLight);
+
+      // Fun colorful rim light with pink/purple tint
+      const rimLight = new THREE.DirectionalLight(0xffaacc, 1.5);
+      rimLight.position.set(-2, 1, -3);
+      scene.add(rimLight);
+
+      // Bright hemisphere lighting for overall illumination
+      const hemiLight = new THREE.HemisphereLight(0xffffff, 0xccccff, 1.2);
+      scene.add(hemiLight);
+
+      // Add some fun colored accent lights
+      const accentLight1 = new THREE.PointLight(0x00ffff, 1.0, 20);
+      accentLight1.position.set(4, 4, 4);
+      scene.add(accentLight1);
+
+      const accentLight2 = new THREE.PointLight(0xff6600, 0.8, 20);
+      accentLight2.position.set(-4, -2, 4);
+      scene.add(accentLight2);
+
+      const accentLight3 = new THREE.PointLight(0xff0099, 0.9, 20);
+      accentLight3.position.set(0, 6, -4);
+      scene.add(accentLight3);
+
+      // Load the model
+      loadModel();
+
+      // Start animation loop
+      animate();
+
+      // Handle window resize
+      window.addEventListener('resize', onWindowResize);
+    }
+
+    function loadModel() {
+      if (!THREE.GLTFLoader) return;
+      
+      const loader = new THREE.GLTFLoader();
+      loader.load(
+        'reference/models/wagglo_3D.glb',
+        function(gltf) {
+          model = gltf.scene;
+          
+          // Center and scale the model
+          const box = new THREE.Box3().setFromObject(model);
+          const center = box.getCenter(new THREE.Vector3());
+          const size = box.getSize(new THREE.Vector3());
+          
+          model.position.x = -center.x - 4.5;
+          model.position.y = -center.y - 5.0;
+          model.position.z = -center.z + 2.0;
+          
+          // Scale to make it prominent
+          const maxDim = Math.max(size.x, size.y, size.z);
+          const scale = 7.5 / maxDim;
+          model.scale.setScalar(scale);
+
+          // Rotate model to vertical orientation
+          model.rotation.x = -Math.PI / 2 + 0.28;
+          model.rotation.z = 0;
+
+          // Enhance materials for bright, fun appearance
+          model.traverse((child) => {
+            if (child.isMesh) {
+              child.castShadow = false;
+              child.receiveShadow = false;
+              
+              if (child.material) {
+                if (child.material.name && child.material.name.toLowerCase().includes('black')) {
+                  child.material.metalness = 0.6;
+                  child.material.roughness = 0.1;
+                  child.material.envMapIntensity = 1.5;
+                  child.material.emissive = new THREE.Color(0x111122);
+                } else if (child.material.name && child.material.name.toLowerCase().includes('screen')) {
+                  child.material.emissive = new THREE.Color(0x003366);
+                  child.material.metalness = 0.1;
+                  child.material.roughness = 0.05;
+                } else {
+                  child.material.metalness = Math.min(child.material.metalness + 0.3, 1.0);
+                  child.material.roughness = Math.max(child.material.roughness - 0.2, 0.0);
+                  child.material.emissive = new THREE.Color(0x050505);
+                }
+              }
+            }
+          });
+
+          scene.add(model);
+          
+          // Show the canvas with fade-in effect
+          const canvas = document.getElementById('three-canvas');
+          canvas.classList.add('loaded');
+          canvas.style.opacity = '0';
+          canvas.style.transition = 'opacity 0.5s ease-in-out';
+          setTimeout(() => {
+            canvas.style.opacity = '1';
+          }, 100);
+        },
+        undefined,
+        function(error) {
+          console.error('Error loading model:', error);
+          const canvas = document.getElementById('three-canvas');
+          canvas.style.display = 'none';
+        }
+      );
+    }
+
+    function animate() {
+      animationId = requestAnimationFrame(animate);
+      
+      if (model) {
+        const time = Date.now() * 0.001;
+        
+        // More lively floating motion for fun effect
+        model.position.y = -3.0 + Math.sin(time * 0.8) * 0.15;
+        
+        // More dynamic rotation for playful movement
+        const baseRotationY = Math.sin(time * 0.4) * 0.2;
+        model.rotation.y = baseRotationY;
+        
+        // Keep the slightly more horizontal orientation with animated tilt
+        model.rotation.x = -Math.PI / 2 + 1 + Math.sin(time * 0.6) * 0.05;
+      }
+      
+      if (renderer && scene && camera) {
+        renderer.render(scene, camera);
+      }
+    }
+
+    function onWindowResize() {
+      if (!camera || !renderer) return;
+      
+      const canvas = document.getElementById('three-canvas');
+      const container = canvas.parentElement;
+      camera.aspect = container.clientWidth / container.clientHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(container.clientWidth, container.clientHeight);
+    }
+
+    // Cleanup on page unload
+    window.addEventListener('beforeunload', () => {
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+      }
+      if (renderer) {
+        renderer.dispose();
+      }
+    });
+  </script>
 
   <!-- Main JavaScript -->
   <script>
