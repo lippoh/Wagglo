@@ -219,10 +219,10 @@
     }
     
     .desktop-logo {
-      position: fixed;
-      top: clamp(8px, 2vw, 10px);
-      left: calc(46% - min(410px, 49vw) - clamp(80px, 12vw, 120px));
-      z-index: 1001;
+      position: absolute;
+      top: clamp(20px, 4vw, 40px);
+      left: clamp(20px, 4vw, 40px);
+      z-index: 10;
       display: none;
       animation: fadeIn 1s ease 0.5s both;
     }
@@ -1241,6 +1241,10 @@
 
   <!-- Hero Section -->
   <section id="hero" class="hero scroll-section" style="position:relative;">
+    <!-- Desktop Logo - Now inside hero -->
+    <div class="desktop-logo">
+      <img src="content/logo/logo.png" alt="Wagglo Logo" />
+    </div>
     <!-- Mobile/Tablet Logo -->
     <div class="hero-logo">
       <img src="content/logo/logo.png" alt="Wagglo Logo" />
